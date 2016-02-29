@@ -4,6 +4,21 @@ $(function() {
     $('.advanced-search').toggleClass('show-flex');
   })
 
+  $(".recipe-search").on('submit', function(event){
+    event.preventDefault();
+
+    var query = {};
+    query.query = $('.search-field').val();
+
+    $('input:checked').each(function(item){
+      if(query[this.name]){
+        query[this.name].push(this.value);
+      }else{
+        query[this.name] = [this.value];
+      }
+    })
+  })
+
   function getRecipe(attributes) {
     $.ajaxSetup({
       headers: {
