@@ -24,19 +24,22 @@ $(function() {
         query[this.name] = [this.value];
       }
     })
+
     console.log(query);
     getRecipes(query);
   })
 
   $("main").on('click', '.recipe .more', function(event){
     var article = $(this).closest('.recipe')[0];
-    getRecipeDetails(article.id);
+    console.log(article.image.match(/\d+/)[0]);
+    var id = article.id || article.image.match(/\d+/)[0]
+    //getRecipeDetails(id);
   })
 
 
   function getRecipes(query) {
 
-    var baseUrl = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=100&"
+    var baseUrl = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients=%2C&number=100&minCalories=1&ranking=1&limitLicense=true&"
 
     for (var i in query) {
       baseUrl += i + '=';
@@ -49,7 +52,7 @@ $(function() {
       baseUrl += '&';
     }
     baseUrl = baseUrl.replace(/&$/, "");
-
+    console.log(baseUrl)
     var recipe = {};
     $.ajax({
       url:baseUrl,
@@ -59,7 +62,7 @@ $(function() {
       console.log(data)
       data.baseUri
       data.results.forEach(function(recipe){
-        $('main').append("<article class='recipe' id='"+recipe.id+"'><div><img height='400' src='"+data.baseUri+recipe.image+"'><i class='fa fa-plus-circle more'></i></div><h4>"+recipe.title+"</h4></article>")
+        $('main').append("<article class='recipe' id='"+recipe.id+"'><div><img height='400' src='"+recipe.image+"'><i class='fa fa-plus-circle more'></i></div><h4>"+recipe.title+"</h4></article>")
       });
     })
   }
@@ -70,7 +73,7 @@ $(function() {
       url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+recipeId+"/information",
       method: 'GET'
     }).then(function(data) {
-
+      console.log(data)
     })
   }
     // Get a recipe summary
