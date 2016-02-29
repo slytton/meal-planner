@@ -1,0 +1,47 @@
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
+  .row .row {
+    align-items: flex-start; }
+    .row .row .column {
+      display: flex;
+      flex: 1 0 auto;
+      flex-direction: column;
+      padding: 0 10px;
+      justify-content: flex-start; }
+
+.diet {
+  border-right: 1px solid black;
+  margin-right: 20px; }
+
+h2 {
+  margin-top: 0; }
+
+div.show-flex {
+  transition-duration: .5s;
+  height: 120px; }
+
+.search {
+  padding: 20px;
+  vertical-align: middle; }
+  .search input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 40%; }
+  .search i {
+    margin-right: 5px;
+    flex: 0 0 0;
+    font-size: 20px; }
+  .search .show-advanced:hover {
+    cursor: pointer;
+    vertical-align: center; }
+
+input[type='checkbox'] {
+  margin-right: 5px; }
+
+.advanced-search {
+  transition-duration: .5s;
+  height: 0;
+  overflow: hidden; }

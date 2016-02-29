@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  .row {
+    align-items: flex-start;
+    .column {
+      display: flex;
+      flex: 1 0 auto;
+      flex-direction: column;
+      padding: 0 10px;
+      justify-content: flex-start;;
+    }
+  }
+}

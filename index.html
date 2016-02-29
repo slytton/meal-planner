@@ -10,60 +10,67 @@
   <body>
     <form class="recipe-search" action="" method="get">
       <div class="search row">
-        <span class="search">
-          <input type="text" name="query" placeholder="search recipes">
-        </span>
-        <i class="fa fa-plus-circle"></i>
+        <input class="search-field" type="text" name="query" placeholder="search recipes">
+
+        <span class="show-advanced"><i class="fa fa-plus-circle"></i>refine</span>
+
       </div>
-      <div class="row">
+      <div class="row advanced-search">
         <div class="diet">
           <h2>Diets</h2>
-          <div class="column">
-            <label for="gluten-free"><input id="gluten-free" type="checkbox" name="diet" value="gluten-free">Gluten-Free</label>
-            <label for="dairy-free"><input id="dairy-free" type="checkbox" name="diet" value="dairy-free">Dairy-Free</label>
-            <label for="vegetarian"><input id="vegetarian" type="checkbox" name="diet" value="vegetarian">Vegetarian</label>
-            <label for="vegan"><input id="vegan" type="checkbox" name="diet" value="vegan">Vegan</label>
-            <label for="paleo"><input id="paleo" type="checkbox" name="diet" value="paleo">Paleo</label>
-          </div>
-          <div class="column">
-            <label for="ketogenic"><input id="ketogenic" type="checkbox" name="diet" value="ketogenic">Ketogenic</label>
-            <label for="kosher"><input id="kosher" type="checkbox" name="diet" value="kosher">Kosher</label>
+          <div class="row">
+            <div class="column">
+              <label for="gluten-free"><input id="gluten-free" type="checkbox" name="diet" value="gluten-free">Gluten-Free</label>
+              <label for="dairy-free"><input id="dairy-free" type="checkbox" name="diet" value="dairy-free">Dairy-Free</label>
+              <label for="vegetarian"><input id="vegetarian" type="checkbox" name="diet" value="vegetarian">Vegetarian</label>
+              <label for="vegan"><input id="vegan" type="checkbox" name="diet" value="vegan">Vegan</label>
+            </div>
+            <div class="column">
+              <label for="paleo"><input id="paleo" type="checkbox" name="diet" value="paleo">Paleo</label>
+              <label for="ketogenic"><input id="ketogenic" type="checkbox" name="diet" value="ketogenic">Ketogenic</label>
+              <label for="kosher"><input id="kosher" type="checkbox" name="diet" value="kosher">Kosher</label>
+            </div>
           </div>
         </div>
-        <div class="intolerances">
+        <div class="intolerances ">
           <h2>Foods To Eliminate</h2>
 
-          <div class="column">
-            <label for="grains"><input id="grains" type="checkbox" name="intolerances" value="grains">Grains</label>
-            <label for="wheat"><input id="wheat" type="checkbox" name="intolerances" value="wheat">Wheat</label>
-            <label for="gluten"><input id="gluten" type="checkbox" name="intolerances" value="gluten">Gluten</label>
-            <label for="dairy"><input id="dairy" type="checkbox" name="intolerances" value="dairy">Dairy</label>
-            <label for="nuts"><input id="nuts" type="checkbox" name="intolerances" value="nuts">Nuts</label>
-          </div>
-          <label for<div class="column">
-            <label for="nuts"><input id="peanuts" type="checkbox" name="intolerances" value="peanuts">Peanuts</label>
-            <label for="seeds"><input id="seeds" type="checkbox" name="intolerances" value="seeds">Seeds</label>
-            <label for="corn"><input id="corn" type="checkbox" name="intolerances" value="corn">Corn</label>
-            <label for="night-shades"><input id="night-shades" type="checkbox" name="intolerances" value="night-shades">Night Shades</label>
-            <label for="sugar"><input id="sugar" type="checkbox" name="intolerances" value="sugar">Sugar</label>
-          </div>
-          <div class="column">
-            <label for="soy"><input id="soy" type="checkbox" name="intolerances" value="soy">Soy</label>
-            <label for="eggs"><input id="eggs" type="checkbox" name="intolerances" value="eggs">Eggs</label>
-            <label for="beef"><input id="beef" type="checkbox" name="intolerances" value="beef">Beef</label>
-            <label for="chicken"><input id="chicken" type="checkbox" name="intolerances" value="chicken">Chicken</label>
-            <label for="pork"><input id="pork" type="checkbox" name="intolerances" value="pork">Pork</label>
-          </div>
-          <div class="column">
-            <label for="fish"><input id="fish" type="checkbox" name="intolerances" value="fish">Fish</label>
-            <label for="seafood"><input id="seafood" type="checkbox" name="seafood" value="fish">Seafood</label>
+          <div class<div class="row">
+            <div class="column">
+              <label for="grains"><input id="grains" type="checkbox" name="intolerances" value="grains">Grains</label>
+              <label for="wheat"><input id="wheat" type="checkbox" name="intolerances" value="wheat">Wheat</label>
+              <label for="gluten"><input id="gluten" type="checkbox" name="intolerances" value="gluten">Gluten</label>
+              <label for="dairy"><input id="dairy" type="checkbox" name="intolerances" value="dairy">Dairy</label>
+            </div>
+            <div class="column">
+              <label for="nuts"><input id="nuts" type="checkbox" name="intolerances" value="nuts">Nuts</label>
+              <label for="peanuts"><input id="peanuts" type="checkbox" name="intolerances" value="peanuts">Peanuts</label>
+              <label for="seeds"><input id="seeds" type="checkbox" name="intolerances" value="seeds">Seeds</label>
+              <label for="corn"><input id="corn" type="checkbox" name="intolerances" value="corn">Corn</label>
+            </div>
+            <div class="column">
+              <label for="night-shades"><input id="night-shades" type="checkbox" name="intolerances" value="night-shades">Night Shades</label>
+              <label for="sugar"><input id="sugar" type="checkbox" name="intolerances" value="sugar">Sugar</label>
+              <label for="soy"><input id="soy" type="checkbox" name="intolerances" value="soy">Soy</label>
+              <label for="eggs"><input id="eggs" type="checkbox" name="intolerances" value="eggs">Eggs</label>
+            </div>
+            <div class="column">
+              <label for="beef"><input id="beef" type="checkbox" name="intolerances" value="beef">Beef</label>
+              <label for="chicken"><input id="chicken" type="checkbox" name="intolerances" value="chicken">Chicken</label>
+              <label for="pork"><input id="pork" type="checkbox" name="intolerances" value="pork">Pork</label>
+              <label for="fish"><input id="fish" type="checkbox" name="intolerances" value="fish">Fish</label>
+            </div>
+            <div class="column">
+              <label for="seafood"><input id="seafood" type="checkbox" name="seafood" value="fish">Seafood</label>
+
+            </div>
           </div>
         </div>
-
       </div>
-
-
     </form>
+    <main>
+      <p></p>
+    </main>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
