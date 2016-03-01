@@ -40,6 +40,7 @@ main {
 
     h4 {
       display: inline-block;
+      padding-right: 10px;
     }
   }
 
@@ -50,10 +51,60 @@ main {
     // transition-duration: .5s;
     z-index: 0;
     color: white;
-
+    visibility: hidden;
+    overflow: scroll;
     .contents {
       display: flex;
+      flex-direction: column;
       padding: 20px 20px 20px 70px;
+    }
+
+    .rating {
+      i {
+        color: rgb(255, 208, 5);
+        font-size: 20px;
+
+      }
+      padding: 0 30px;
+    }
+
+    .row.header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .attribution {
+      color: rgb(184, 184, 184);
+      font-size: .8em;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .row {
+      align-items: flex-start;
+      justify-content: space-around;
+    }
+    .column {
+      flex: 0 0 300px;
+    }
+
+    li {
+      list-style: none;
+      background-color: rgb(160, 160, 160);
+      border-bottom: 1px solid rgb(65, 65, 65);
+      padding: 8px;
+    }
+
+    ul {
+      padding-left: 0;
+    }
+
+    h3 {
+      margin-top: 0px;
     }
   }
 
@@ -64,6 +115,7 @@ main {
     background: rgb(65, 65, 65);
     height: 460px;
     width: 100%;
+    visibility: visible;
     border-top: 1px solid rgb(27, 26, 26);
     // transition-duration: .5s;
   }

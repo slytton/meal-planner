@@ -10,9 +10,9 @@
   <body>
     <form class="recipe-search" action="" method="get">
       <div class="search row">
-        <input class="search-field" type="text" name="query" placeholder="search recipes">
+        <input class="search-field" type="text" name="query" placeholder="search recipes" focus>
 
-        <span class="show-advanced"><i class="fa fa-plus-circle"></i>refine</span>
+        <span class="show-advanced"><i class="fa fa-arrow-down"></i>Advanced Search</span>
 
       </div>
       <div class="row advanced-search">
@@ -20,49 +20,67 @@
           <h2>Diets</h2>
           <div class="row">
             <div class="column">
-              <label for="allowed-diet[]"><input id="gluten-free" type="checkbox" name="diet" value="gluten-free">Gluten-Free</label>
-              <label for="allowed-diet[]"><input id="dairy-free" type="checkbox" name="diet" value="dairy-free">Dairy-Free</label>
-              <label for="allowed-diet[]"><input id="vegetarian" type="checkbox" name="diet" value="vegetarian">Vegetarian</label>
-              <label for="vegan"><input id="vegan" type="checkbox" name="diet" value="vegan">Vegan</label>
+              <label for="gluten-free"><input id="gluten-free" type="checkbox" name="allowedAllergy[]" value="393^Gluten-Free">Gluten-Free</label>
+              <label for="dairy-free"><input id="dairy-free" type="checkbox" name="allowedAllergy[]" value="396^Dairy-Free">Dairy-Free</label>
+              <label for="vegetarian"><input id="vegetarian" type="checkbox" name="allowedDiet[]" value="387^Lacto-ovo vegetarian">Vegetarian</label>
+              <label for="vegan"><input id="Vegan" type="checkbox" name="allowedDiet[]" value="386^Vegan">Vegan</label>
+              <label for="paleo"><input id="paleo" type="checkbox" name="allowedDiet[]" value="403^Paleo">Paleo</label>
             </div>
             <div class="column">
-              <label for="paleo"><input id="paleo" type="checkbox" name="diet" value="paleo">Paleo</label>
-              <label for="ketogenic"><input id="ketogenic" type="checkbox" name="diet" value="ketogenic">Ketogenic</label>
-              <label for="kosher"><input id="kosher" type="checkbox" name="diet" value="kosher">Kosher</label>
+              <label for="ovo-veg"><input id="ovo-veg" type="checkbox" name="allowedDiet[]" value="389^Ovo vegetarian">Ovo Vegi.</label>
+              <label for="lacto-veg"><input id="lacto-vegi" type="checkbox" name="allowedDiet[]" value="388^Lacto vegetarian">Lacto Vegi.</label>
             </div>
           </div>
         </div>
-        <div class="excludedIngredient">
+        <div class="excluded-ingredient">
           <h2>Excluded Ingredients</h2>
 
           <div class<div class="row">
             <div class="column">
               <label for="grains"><input id="grains" type="checkbox" name="excludedIngredient[]" value="grains">Grains</label>
-              <label for="wheat"><input id="wheat" type="checkbox" name="excludedIngredient[]" value="wheat">Wheat</label>
+              <label for="wheat"><input id="wheat" type="checkbox" name="allowedAllergy[]" value="392^Wheat-Free">Wheat</label>
               <label for="gluten"><input id="gluten" type="checkbox" name="excludedIngredient[]" value="gluten">Gluten</label>
               <label for="dairy"><input id="dairy" type="checkbox" name="excludedIngredient[]" value="dairy">Dairy</label>
+              <label for="nuts"><input id="nuts" type="checkbox" name="allowedAllergy[]" value="395^Tree Nut-Free">Nuts</label>
             </div>
             <div class="column">
-              <label for="nuts"><input id="nuts" type="checkbox" name="excludedIngredient[]" value="nuts">Nuts</label>
-              <label for="peanuts"><input id="peanuts" type="checkbox" name="excludedIngredient[]" value="peanuts">Peanuts</label>
+              <label for="peanuts"><input id="peanuts" type="checkbox" name="allowedAllergy[]" value="394^Peanut-Free">Peanuts</label>
               <label for="seeds"><input id="seeds" type="checkbox" name="excludedIngredient[]" value="seeds">Seeds</label>
               <label for="corn"><input id="corn" type="checkbox" name="excludedIngredient[]" value="corn">Corn</label>
-            </div>
-            <div class="column">
-              <label for="night-shades"><input id="night-shades" type="checkbox" name="excludedIngredient[]" value="night-shades">Night Shades</label>
+              <label for="soy"><input id="soy" type="checkbox" name="allowedAllergy[]" value="400^Soy-Free">Soy</label>
               <label for="sugar"><input id="sugar" type="checkbox" name="excludedIngredient[]" value="sugar">Sugar</label>
-              <label for="soy"><input id="soy" type="checkbox" name="excludedIngredient[]" value="soy">Soy</label>
-              <label for="eggs"><input id="eggs" type="checkbox" name="excludedIngredient[]" value="eggs">Eggs</label>
             </div>
             <div class="column">
+              <label for="eggs"><input id="eggs" type="checkbox" name="allowedAllergy[]" value="397^Egg-Free">Eggs</label>
               <label for="beef"><input id="beef" type="checkbox" name="excludedIngredient[]" value="beef">Beef</label>
               <label for="chicken"><input id="chicken" type="checkbox" name="excludedIngredient[]" value="chicken">Chicken</label>
               <label for="pork"><input id="pork" type="checkbox" name="excludedIngredient[]" value="pork">Pork</label>
               <label for="fish"><input id="fish" type="checkbox" name="excludedIngredient[]" value="fish">Fish</label>
             </div>
             <div class="column">
-              <label for="seafood"><input id="seafood" type="checkbox" name="seafood" value="fish">Seafood</label>
-
+              <label for="seafood"><input id="seafood" type="checkbox" name="allowedAllergy[]" value="398^Seafood-Free">Seafood</label>
+              <label for="sesame"><input id="sesame" type="checkbox" name="allowedAllergy[]" value="399^Sesame-Free">Sesame</label>
+              <label for="sulfite"><input id="sulfite" type="checkbox" name="allowedAllergy[]" value="401^Sulfite-Free">Sulfite</label>
+              <label for="tomatoes"><input id="tomatoes" type="checkbox" name="excludedIngredient[]" value="tomatoes">Tomatoes</label>
+              <label for="eggplant"><input id="eggplant" type="checkbox" name="excludedIngredient[]" value="eggplant">Eggplant</label>
+            </div>
+            <div class="column">
+              <label for="potatoes"><input id="potatoes" type="checkbox" name="excludedIngredient[]" value="potatoes">Potatoes</label>
+            </div>
+          </div>
+        </div>
+        <div class="courses">
+          <h2>Course</h2>
+          <div class<div class="row">
+            <div class="column">
+              <label for="main-dish"><input id="main-dish" type="checkbox" name="allowedCourse[]" value="course^course-Main Dishes">Main Dish</label>
+              <label for="desert"><input id="desert" type="checkbox" name="allowedCourse[]" value="course^course-Desserts">Desert</label>
+              <label for="side-dish"><input id="side-dish" type="checkbox" name="allowedCourse[]" value="course^course-Side Dishes">Side</label>
+              <label for="lunch"><input id="lunch" type="checkbox" name="allowedCourse[]" value="course^course-Lunch and Snacks">Lunch</label>
+              <label for="breakfast"><input id="breakfast" type="checkbox" name="allowedCourse[]" value="course^course-Breakfast and Brunch">Breakfast</label>
+            </div>
+            <div class="column">
+              <label for="soups"><input id="soups" type="checkbox" name="allowedCourse[]" value="course^course-Soups">Soups</label>
             </div>
           </div>
         </div>
@@ -84,3 +102,20 @@
 
 
 <div >
+
+
+
+  <!--
+  allowedAllergy[]
+  396^Dairy-Free
+  397^Egg-Free
+  393^Gluten-Free
+  394^Peanut-Free
+  398^Seafood-Free
+  399^Sesame-Free
+  400^Soy-Free
+  401^Sulfite-Free
+  395^Tree Nut-Free
+  392^Wheat-Free
+  [{"id":"396","shortDescription":"Dairy-Free","longDescription":"Dairy-Free","searchValue":"396^Dairy-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"397","shortDescription":"Egg-Free","longDescription":"Egg-Free","searchValue":"397^Egg-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"393","shortDescription":"Gluten-Free","longDescription":"Gluten-Free","searchValue":"393^Gluten-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"394","shortDescription":"Peanut-Free","longDescription":"Peanut-Free","searchValue":"394^Peanut-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"398","shortDescription":"Seafood-Free","longDescription":"Seafood-Free","searchValue":"398^Seafood-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"399","shortDescription":"Sesame-Free","longDescription":"Sesame-Free","searchValue":"399^Sesame-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"400","shortDescription":"Soy-Free","longDescription":"Soy-Free","searchValue":"400^Soy-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"401","shortDescription":"Sulfite-Free","longDescription":"Sulfite-Free","searchValue":"401^Sulfite-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"395","shortDescription":"Tree Nut-Free","longDescription":"Tree Nut-Free","searchValue":"395^Tree Nut-Free","type":"allergy","localesAvailableIn":["en-US"]},{"id":"392","shortDescription":"Wheat-Free","longDescription":"Wheat-Free","searchValue":"392^Wheat-Free","type":"allergy","localesAvailableIn":["en-US"]}]);
+-->

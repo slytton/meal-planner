@@ -25,6 +25,7 @@ $(function() {
     getRecipes(query);
   });
 
+
   $("main").on('click', '.more', function(event){
     var recipe = $(this).closest('.recipe')[0];
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
@@ -55,14 +56,11 @@ $(function() {
     var baseUrl = "http://api.yummly.com/v1/api/recipes?_app_id="+id+"&_app_key="+key+"&requirePictures=true&maxResult=100&start=0&"
 
     for (var i in query) {
-      baseUrl += i + '=';
       if (query.hasOwnProperty(i)) {
         query[i].forEach(function(item, index, array){
-          baseUrl += item;
-          if(index < array.length - 1) baseUrl += ",";
+          baseUrl += i + '=' + item + '&';
         });
       }
-      baseUrl += '&';
     }
     baseUrl = baseUrl.replace(/&$/, "");
     console.log(baseUrl)
@@ -76,51 +74,52 @@ $(function() {
       console.log(data);
 
       data.matches.forEach(function(recipe){
-        $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='add'><i class=''</span></div><h4>"+recipe.recipeName+"</h4></article>")
+        $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='add'></span></div><h4>"+recipe.recipeName+"</h4></article>")
       });
     })
   }
 
+
   function getRecipeDetails(recipeId, element){
-    $(element).html("<div class='contents'>Hello World</div>");
     var recipe = {};
     $.ajax({
       url: "http://api.yummly.com/v1/api/recipe/"+recipeId+"?_app_id="+id+"&_app_key="+key,
       method: 'GET',
       dataType: 'jsonp'
     }).then(function(data) {
-      var name = data.name;
-      var attribution = data.attribution;
-      var ingredients = data.ingredientLines;
-      var nutritionCalories = [data.nutritionEstimates[0],
-                               data.nutritionEstimates[1],
-                               data.nutritionEstimates[7],
-                               data.nutritionEstimates[8],
-                               data.nutritionEstimates[9],
-                               data.nutritionEstimates[12]];
-      var name = data.name;
-      var servings = data.yeild;
-      var cookTime = data.totalTime;
-      var rating = data.rating;
-      var fullRecipe = data.sourceRecipeUrl;
+      console.log(data);
 
-      var name = '<h3 class="title">' + data.name + '</h3>'
-      var attribution = '<h6 class="attribution"><a href="'+data.attribution.url+'"Powered by Yummly.com</a></h6>';
-      var ingredients = data.ingredientLines.reduce(function(prev, item){
+      var nutritionalAttributes = ["ENERC_KCAL", "FAT", "CHOCDF", "FIBTG", "SUGAR", "PROCNT", "CA"];
+
+
+      var name = data.name ? '<h2 class="title">' + data.name + '</h2>' : "";
+      var rating = data.rating ? '<span class="rating">' + data.rating + '/5 <i class="fa fa-star"></i></span>' : "";
+      var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
+      var image = data.image[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
+      var cooktime = data.totalTime ? '<p class="cooktime">'+data.totalTime+'</p>' : "";
+      var servings = data.yeild ? '<p class="servings">Serves: '+data.yeild+'</p>' : "";
+      var fullRecipe = data.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.sourceRecipeUrl+"'>See full recipe</a>" : "";
+
+      var ingredients = data.ingredientLines ? data.ingredientLines.reduce(function(prev, item){
         return prev + "<li>"+item+"</li>"
-      }, "<ul class='ingredients'>") + "</ul>";
-      
-      $(element).html();
+      }, "<ul class='ingredients'>") + "</ul>" : "";
+
+      var nutrition = data.nutritionEstimates ? data.nutritionEstimates.reduce(function(prev, item){
+        if(nutritionalAttributes.includes(item.attribute)){
+          if(!item.description) item.description = "";
+          return prev + "<li>"+item.description.replace(/,[a-z]/i, "")+": "+item.value+" "+item.unit.plural+"</li>"
+        }
+        return prev;
+      }, "<ul class='nutrition'>") + "</ul>" : "";
+
+
+      var top = "<div class='row header'>"+name+rating+attribution+"</div>"
+      var column1 = "<div class='column'>"+image+"<div>"+cooktime+servings+fullRecipe+"</div></div>";
+      var column2 = "<div class='column ingredients'><h3>Ingredients: </h3>"+ingredients+"</div>";
+      var column3 = "<div class='column nutrition'><h3>Nutrition</h3>"+nutrition+"</div>";
+      $(element).html("<div class='contents'>"+top+"<div class='row'>"+column1+column2+column3+"</div></div>");
     })
   }
-    // Get a recipe summary
-    // https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/summary
-
-    // Get detailed recipe information
-    //https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information
-
 
   //getRecipe();
-
-
 });

@@ -5,7 +5,7 @@
   width: 100%;
   position: fixed;
   z-index: 5;
-  background-color: white;
+  background-color: rgb(0, 150, 136);
 
   input {
     padding: 10px;
@@ -14,6 +14,9 @@
 
   .search-field {
     width: 40%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    outline: none;
   }
 
   i {
@@ -22,9 +25,14 @@
     font-size: 20px;
   }
 
+  .show-advanced {
+    color: white;
+  }
+
   .show-advanced:hover {
     cursor: pointer;
     vertical-align: center;
+    color: rgb(175, 38, 38);
   }
 
 }
@@ -34,15 +42,54 @@ input[type='checkbox'] {
 }
 
 .advanced-search {
+  margin-left: 50px;
   margin-top: 20px;
   transition-duration: .5s;
   height: 0;
   overflow: hidden;
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(224, 224, 224);
+  .diet {
+    border-right: 1px solid black;
+    margin-right: 20px;
+
+    h2 {
+      padding-left: 10px;
+    }
+  }
+
+  .excluded-ingredient {
+    @extend.diet;
+  }
+
+  .courses {
+    @extend.diet;
+    border-right: 0px;
+  }
 }
 
 div.show-flex {
   transition-duration: .5s;
-  height: 120px;
+  height: auto;
   padding: 20px;
+}
+
+
+@media only screen and (max-width: 1084px) {
+  .advanced-search {
+    align-content: center;
+    overflow: scroll;
+    .diet {
+      flex: 0 0 100%;
+      margin: 0 0 10px 0;
+      border-right: 0;
+    }
+  }
+  .row {
+    .row{
+      justify-content: flex-start;
+      .column {
+        flex: 0 0 110px;
+      }
+    }
+  }
 }
