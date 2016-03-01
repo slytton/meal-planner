@@ -7,7 +7,10 @@ h2 {
   margin-top: 0;
 }
 
-div.show-flex {
-  transition-duration: .5s;
-  height: 120px;
+div.layout {
+  display:flex;
+}
+
+i:hover {
+  cursor: pointer;
 }

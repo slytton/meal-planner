@@ -20,9 +20,9 @@
           <h2>Diets</h2>
           <div class="row">
             <div class="column">
-              <label for="gluten-free"><input id="gluten-free" type="checkbox" name="diet" value="gluten-free">Gluten-Free</label>
-              <label for="dairy-free"><input id="dairy-free" type="checkbox" name="diet" value="dairy-free">Dairy-Free</label>
-              <label for="vegetarian"><input id="vegetarian" type="checkbox" name="diet" value="vegetarian">Vegetarian</label>
+              <label for="allowed-diet[]"><input id="gluten-free" type="checkbox" name="diet" value="gluten-free">Gluten-Free</label>
+              <label for="allowed-diet[]"><input id="dairy-free" type="checkbox" name="diet" value="dairy-free">Dairy-Free</label>
+              <label for="allowed-diet[]"><input id="vegetarian" type="checkbox" name="diet" value="vegetarian">Vegetarian</label>
               <label for="vegan"><input id="vegan" type="checkbox" name="diet" value="vegan">Vegan</label>
             </div>
             <div class="column">
@@ -32,33 +32,33 @@
             </div>
           </div>
         </div>
-        <div class="intolerances ">
-          <h2>Foods To Eliminate</h2>
+        <div class="excludedIngredient">
+          <h2>Excluded Ingredients</h2>
 
           <div class<div class="row">
             <div class="column">
-              <label for="grains"><input id="grains" type="checkbox" name="intolerances" value="grains">Grains</label>
-              <label for="wheat"><input id="wheat" type="checkbox" name="intolerances" value="wheat">Wheat</label>
-              <label for="gluten"><input id="gluten" type="checkbox" name="intolerances" value="gluten">Gluten</label>
-              <label for="dairy"><input id="dairy" type="checkbox" name="intolerances" value="dairy">Dairy</label>
+              <label for="grains"><input id="grains" type="checkbox" name="excludedIngredient[]" value="grains">Grains</label>
+              <label for="wheat"><input id="wheat" type="checkbox" name="excludedIngredient[]" value="wheat">Wheat</label>
+              <label for="gluten"><input id="gluten" type="checkbox" name="excludedIngredient[]" value="gluten">Gluten</label>
+              <label for="dairy"><input id="dairy" type="checkbox" name="excludedIngredient[]" value="dairy">Dairy</label>
             </div>
             <div class="column">
-              <label for="nuts"><input id="nuts" type="checkbox" name="intolerances" value="nuts">Nuts</label>
-              <label for="peanuts"><input id="peanuts" type="checkbox" name="intolerances" value="peanuts">Peanuts</label>
-              <label for="seeds"><input id="seeds" type="checkbox" name="intolerances" value="seeds">Seeds</label>
-              <label for="corn"><input id="corn" type="checkbox" name="intolerances" value="corn">Corn</label>
+              <label for="nuts"><input id="nuts" type="checkbox" name="excludedIngredient[]" value="nuts">Nuts</label>
+              <label for="peanuts"><input id="peanuts" type="checkbox" name="excludedIngredient[]" value="peanuts">Peanuts</label>
+              <label for="seeds"><input id="seeds" type="checkbox" name="excludedIngredient[]" value="seeds">Seeds</label>
+              <label for="corn"><input id="corn" type="checkbox" name="excludedIngredient[]" value="corn">Corn</label>
             </div>
             <div class="column">
-              <label for="night-shades"><input id="night-shades" type="checkbox" name="intolerances" value="night-shades">Night Shades</label>
-              <label for="sugar"><input id="sugar" type="checkbox" name="intolerances" value="sugar">Sugar</label>
-              <label for="soy"><input id="soy" type="checkbox" name="intolerances" value="soy">Soy</label>
-              <label for="eggs"><input id="eggs" type="checkbox" name="intolerances" value="eggs">Eggs</label>
+              <label for="night-shades"><input id="night-shades" type="checkbox" name="excludedIngredient[]" value="night-shades">Night Shades</label>
+              <label for="sugar"><input id="sugar" type="checkbox" name="excludedIngredient[]" value="sugar">Sugar</label>
+              <label for="soy"><input id="soy" type="checkbox" name="excludedIngredient[]" value="soy">Soy</label>
+              <label for="eggs"><input id="eggs" type="checkbox" name="excludedIngredient[]" value="eggs">Eggs</label>
             </div>
             <div class="column">
-              <label for="beef"><input id="beef" type="checkbox" name="intolerances" value="beef">Beef</label>
-              <label for="chicken"><input id="chicken" type="checkbox" name="intolerances" value="chicken">Chicken</label>
-              <label for="pork"><input id="pork" type="checkbox" name="intolerances" value="pork">Pork</label>
-              <label for="fish"><input id="fish" type="checkbox" name="intolerances" value="fish">Fish</label>
+              <label for="beef"><input id="beef" type="checkbox" name="excludedIngredient[]" value="beef">Beef</label>
+              <label for="chicken"><input id="chicken" type="checkbox" name="excludedIngredient[]" value="chicken">Chicken</label>
+              <label for="pork"><input id="pork" type="checkbox" name="excludedIngredient[]" value="pork">Pork</label>
+              <label for="fish"><input id="fish" type="checkbox" name="excludedIngredient[]" value="fish">Fish</label>
             </div>
             <div class="column">
               <label for="seafood"><input id="seafood" type="checkbox" name="seafood" value="fish">Seafood</label>
@@ -68,12 +68,19 @@
         </div>
       </div>
     </form>
-    <main>
-    </main>
-    <aside>
-
-    </aside>
+    <div class="layout">
+      <aside>
+        <i class="fa fa-calendar"></i>
+        <i class="fa fa-star"></i>
+      </aside>
+      <main>
+      </main>
+    </div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
 </html>
+
+
+<div >

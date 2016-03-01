@@ -1,10 +1,20 @@
 
 main {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-left: 50px;
+  top: 90px;
+
   .recipe {
     max-width: 250px;
+    //transition-duration: .5s;
+
+    &.showing-recipe-info{
+      margin-bottom: 500px;
+      //transition-duration: .5s;
+    }
 
     div {
       position: relative;
@@ -31,6 +41,30 @@ main {
     h4 {
       display: inline-block;
     }
+  }
 
+  .recipe-info {
+    position: absolute;
+    height: 0;
+    width: 100%;
+    // transition-duration: .5s;
+    z-index: 0;
+    color: white;
+
+    .contents {
+      display: flex;
+      padding: 20px 20px 20px 70px;
+    }
+  }
+
+  .show-recipe-info {
+    display: block;
+    position: absolute;
+    flex: 0 0 100%;
+    background: rgb(65, 65, 65);
+    height: 460px;
+    width: 100%;
+    border-top: 1px solid rgb(27, 26, 26);
+    // transition-duration: .5s;
   }
 }

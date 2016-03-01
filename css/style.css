@@ -19,22 +19,47 @@
 h2 {
   margin-top: 0; }
 
-div.show-flex {
-  transition-duration: .5s;
-  height: 120px; }
+div.layout {
+  display: flex; }
 
-.search {
-  padding: 20px;
-  vertical-align: middle; }
-  .search input {
+i:hover {
+  cursor: pointer; }
+
+aside {
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background-color: gray;
+  flex: 0 0 50px;
+  top: 80px;
+  font-size: 20px;
+  z-index: 6; }
+  aside i {
+    padding-top: 20px;
+    font-size: 20px; }
+
+.recipe-search {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+  background-color: white; }
+  .recipe-search input {
     padding: 10px;
-    margin-right: 10px;
+    margin-right: 10px; }
+  .recipe-search .search-field {
     width: 40%; }
-  .search i {
+  .recipe-search i {
     margin-right: 5px;
     flex: 0 0 0;
     font-size: 20px; }
-  .search .show-advanced:hover {
+  .recipe-search .show-advanced:hover {
     cursor: pointer;
     vertical-align: center; }
 
@@ -42,16 +67,28 @@ input[type='checkbox'] {
   margin-right: 5px; }
 
 .advanced-search {
+  margin-top: 20px;
   transition-duration: .5s;
   height: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #dddddd; }
+
+div.show-flex {
+  transition-duration: .5s;
+  height: 120px;
+  padding: 20px; }
 
 main {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; }
+  justify-content: space-around;
+  padding-left: 50px;
+  top: 90px; }
   main .recipe {
     max-width: 250px; }
+    main .recipe.showing-recipe-info {
+      margin-bottom: 500px; }
     main .recipe div {
       position: relative;
       background-color: black;
@@ -70,3 +107,20 @@ main {
         height: 250px; }
     main .recipe h4 {
       display: inline-block; }
+  main .recipe-info {
+    position: absolute;
+    height: 0;
+    width: 100%;
+    z-index: 0;
+    color: white; }
+    main .recipe-info .contents {
+      display: flex;
+      padding: 20px 20px 20px 70px; }
+  main .show-recipe-info {
+    display: block;
+    position: absolute;
+    flex: 0 0 100%;
+    background: #414141;
+    height: 460px;
+    width: 100%;
+    border-top: 1px solid #1b1a1a; }
