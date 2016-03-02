@@ -24,14 +24,13 @@ $(function() {
       }
     })
 
+    $(this).find('.advanced-search').removeClass('show-flex');
     console.log(query);
     getRecipes(query);
   });
 
 
-  $("main").on('click', '.recipe img', function(event){
-    console.log(event);
-    if(event.toElement != 'img') return;
+  $("main").on('click', '.recipe img, .more', function(event){
     var recipe = $(this).closest('.recipe')[0];
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
     var recipeId = $(recipe).data('recipe-id');
