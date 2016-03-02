@@ -50,6 +50,10 @@ $(function() {
     }
   });
 
+  $('main').on('click', '.recipe .fa-calendar', function(){
+    var recipe = $(this).closest('.recipe');
+    $(recipe).find('.day-box').slideToggle(200);
+  })
 
   function getRecipes(query) {
 
@@ -73,11 +77,13 @@ $(function() {
       $('main').html("");
       console.log(data);
 
+      var dayBox = "<div class='day-box'><div class='day'>Monday</div><div class='day'>Tuesday</div><div class='day'>Wednesday</div><div class='day'>Thursday</div><div class='day'>Friday</div><div class='day'>Saturday</div><div class='day'>Sunday</div></div>";
       data.matches.forEach(function(recipe){
-        $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='add'></span></div><h4>"+recipe.recipeName+"</h4></article>")
+        $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><i class='fa fa-star'></i>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
       });
     })
   }
+
 
 
   function getRecipeDetails(recipeId, element){
@@ -95,7 +101,7 @@ $(function() {
       var name = data.name ? '<h2 class="title">' + data.name + '</h2>' : "";
       var rating = data.rating ? '<span class="rating">' + data.rating + '/5 <i class="fa fa-star"></i></span>' : "";
       var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
-      var image = data.image[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
+      var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
       var cooktime = data.totalTime ? '<p class="cooktime">'+data.totalTime+'</p>' : "";
       var servings = data.yeild ? '<p class="servings">Serves: '+data.yeild+'</p>' : "";
       var fullRecipe = data.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.sourceRecipeUrl+"'>See full recipe</a>" : "";

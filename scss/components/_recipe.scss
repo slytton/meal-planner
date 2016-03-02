@@ -16,7 +16,7 @@ main {
       //transition-duration: .5s;
     }
 
-    div {
+    .image-crop {
       position: relative;
       background-color: black;
       text-align: center;
@@ -24,13 +24,41 @@ main {
       height: 250px;
       overflow: hidden;
 
+      i {
+        color: white;
+        z-index: 3;
+        font-size: 30px;
+        padding-left: 10px;
+      }
+      .floating-icons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
       .more {
         position: absolute;
-        color: white;
-        z-index: 2;
-        font-size: 30px;
         bottom: 10px;
         right: 10px;
+      }
+
+      .day-box {
+        display: none;
+        position: absolute;
+        font-size: 1em;
+        color: white;
+        z-index: 2;
+        top: 45px;
+        right: 0px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        .day{
+          border-bottom: 1px solid rgb(197, 197, 197);
+          padding: 5px;
+        }
+        .day:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
       }
 
       img {
