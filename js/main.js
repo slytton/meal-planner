@@ -105,24 +105,20 @@ $(function() {
 
 
   function reDrawPlan() {
-
     var weeklyPlan = $('.weekly-plan');
     var emptyMessage = "<h3 class='empty-text'>Choose some recipes!</h3>"
+    var toSort = [];
     if(!localStorage.getItem('meal-magnet')) return $(weeklyPlan).html(emptyMessage);
     MMStorage = JSON.parse(localStorage.getItem('meal-magnet'));
     if(objectLength(MMStorage) === 0) return $(weeklyPlan).html(emptyMessage);
 
-
     $(weeklyPlan).html("");
-    // $(weeklyPlan).find('day').each(function(){
-    //   $(this).html("");
-    // });
+
 
     for (var day in MMStorage) {
       if (MMStorage.hasOwnProperty(day)) {
         var contents = "";
         var dayBucket = MMStorage[day];
-        '<h5>'+day+'</h5>'
         for (var recipeId in dayBucket) {
           if (dayBucket.hasOwnProperty(recipeId)) {
             var img = "<img height='60' width='60' src='"+dayBucket[recipeId].imageUrl+"' alt='recipe image'>";
@@ -133,9 +129,21 @@ $(function() {
           }
         }
         var dayTitle = '<h3>'+day+'<h3>';
-        $(weeklyPlan).append("<div class='day' data-day='"+day+"'>"+dayTitle+contents+"</div>");
+        toSort.push("<div class='day' data-day='"+day+"'>"+dayTitle+contents+"</div>");
       }
     }
+
+    $(weeklyPlan).html(sortStringsByDayNames(toSort).join(""));
+
+  }
+
+  function sortStringsByDayNames(elements){
+    var order = {Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6}
+    var regex = /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/;
+    elements.sort(function(a, b){
+      return order[a.match(regex)[0]] - order[b.match(regex)[0]]
+    })
+    return elements;
   }
 
   function getRecipes(query) {

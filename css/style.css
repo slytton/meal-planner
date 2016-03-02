@@ -63,7 +63,8 @@ aside {
     opacity: 1;
     width: 90%;
     height: auto;
-    transition-duration: .5s; }
+    transition-duration: .5s;
+    overflow: scroll; }
   aside .recipe {
     display: flex;
     padding: 5px;
@@ -185,6 +186,8 @@ main {
         padding: 10px;
         border-radius: 5px;
         background-color: rgba(0, 0, 0, 0.34); }
+        main .recipe .image-crop .floating-icons .fa-star {
+          cursor: default; }
         main .recipe .image-crop .floating-icons .fa-calendar {
           padding-left: 0px; }
       main .recipe .image-crop .more {

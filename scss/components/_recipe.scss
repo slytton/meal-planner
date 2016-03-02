@@ -39,6 +39,10 @@ main {
         border-radius: 5px;
         background-color: rgba(0, 0, 0, 0.34);
 
+        .fa-star {
+          cursor: default;  
+        }
+
         .fa-calendar {
           padding-left: 0px;
         }
