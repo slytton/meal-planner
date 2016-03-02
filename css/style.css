@@ -231,6 +231,11 @@ main {
       main .recipe-info .rating i {
         color: #ffd005;
         font-size: 20px; }
+    main .recipe-info .full-recipe {
+      color: #fdc118;
+      text-decoration: none; }
+    main .recipe-info .full-recipe:hover {
+      color: #eb8b27; }
     main .recipe-info .row.header {
       display: flex;
       justify-content: flex-start;

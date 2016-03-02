@@ -40,7 +40,7 @@ main {
         background-color: rgba(0, 0, 0, 0.34);
 
         .fa-star {
-          cursor: default;  
+          cursor: default;
         }
 
         .fa-calendar {
@@ -106,6 +106,15 @@ main {
 
       }
       padding: 0 30px;
+    }
+
+    .full-recipe {
+      color: rgb(253, 193, 24);
+      text-decoration: none;
+    }
+
+    .full-recipe:hover {
+      color: rgb(235, 139, 39);
     }
 
     .row.header {

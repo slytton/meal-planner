@@ -200,7 +200,7 @@ $(function() {
       var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
       var cooktime = data.totalTime ? '<p class="cooktime">Cooktime: '+data.totalTime+'</p>' : "";
       var servings = data.yield ? '<p class="servings">Serves: '+data.yield+'</p>' : "";
-      var fullRecipe = data.source.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.source.sourceRecipeUrl+"'>See full recipe</a>" : "";
+      var fullRecipe = data.source.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.source.sourceRecipeUrl+"'>See full recipe <i class='fa fa-arrow-right'></i></a>" : "";
 
       var ingredients = data.ingredientLines ? data.ingredientLines.reduce(function(prev, item){
         return prev + "<li>"+item+"</li>"
