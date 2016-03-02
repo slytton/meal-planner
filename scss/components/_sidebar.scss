@@ -1,6 +1,8 @@
 aside {
+  overflow: scroll;
   display: flex;
   position: fixed;
+  top: 80px;
   height: 100vh;
   width: 50px;
   justify-content: flex-start;
@@ -8,18 +10,76 @@ aside {
   flex-direction: column;
   background-color: rgb(175, 38, 38);
   flex: 0 0 50px;
-  top: 80px;
   font-size: 20px;
   z-index: 6;
+  color: white;
 
   i {
+    text-align: center;
+    width: 100%;
     padding-top: 30px;
     font-size: 20px;
-    color: white;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+  }
+
+  .weekly-plan {
+    opacity: 0;
+    text-align: center;
+    width: auto;
+    height: 0px;
+    padding: 0px;
+    overflow: hidden;
+
+  h3 {
+    font-weight: normal;
+  }
+    .empty-text {
+      background-color: #000000;
+      color: transparent;
+      text-shadow: 0px 1px 3px rgb(175, 38, 38);
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+
+
+  .show-plan {
+    opacity: 1;
+    width: 90%;
+    height: auto;
+    transition-duration: .5s;
+  }
+
+  .recipe {
+    display: flex;
+    padding: 5px;
+    margin-bottom: 1px;
+    background-color: rgba(0, 0, 0, 0.53);
+    font-size: .65em;
+    align-items: center;
+    & * {
+      padding-right: 10px;
+    }
+    .fa-close {
+      width: auto;
+      font-size: 25px;
+      border-bottom: none;
+      padding: 0 10px 0 0;
+    }
   }
 }
 
 
 .slideAside {
-  width: 300px;
+  width: 320px;
+}
+
+
+@media only screen and (max-width: 421px) {
+  aside {
+    top: 100px;
+  }
 }

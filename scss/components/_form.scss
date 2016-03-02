@@ -1,22 +1,31 @@
 .recipe-search {
+  position: fixed;
+  z-index: 5;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  position: fixed;
-  z-index: 5;
   background-color: rgb(0, 150, 136);
 
   input {
     padding: 10px;
     margin-right: 10px;
+    border: 1px solid gray;
+    outline: none;
+  }
+
+  .submit {
+    color: white;
+    margin-right: 0;
+    border-radius: 5px 0 0 5px;
+    border-right:none;
+    background-color: rgb(255, 87, 34);
   }
 
   .search-field {
     width: 40%;
-    border: 1px solid gray;
-    border-radius: 5px;
-    outline: none;
+
+    border-radius: 0 5px 5px 0;
   }
 
   i {
@@ -32,7 +41,7 @@
   .show-advanced:hover {
     cursor: pointer;
     vertical-align: center;
-    color: rgb(175, 38, 38);
+    color: rgb(221, 221, 221);
   }
 
 }
@@ -42,7 +51,7 @@ input[type='checkbox'] {
 }
 
 .advanced-search {
-  margin-left: 50px;
+  //margin-left: 50px;
   margin-top: 20px;
   transition-duration: .5s;
   height: 0;

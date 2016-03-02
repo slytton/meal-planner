@@ -29,7 +29,9 @@ $(function() {
   });
 
 
-  $("main").on('click', '.more', function(event){
+  $("main").on('click', '.recipe img', function(event){
+    console.log(event);
+    if(event.toElement != 'img') return;
     var recipe = $(this).closest('.recipe')[0];
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
     var recipeId = $(recipe).data('recipe-id');
@@ -53,33 +55,36 @@ $(function() {
     }
   });
 
-  $('main').on('click', '.recipe .fa-calendar', function(){
+  $('main').on('click', '.recipe .fa-calendar', function(event){
     var recipe = $(this).closest('.recipe');
     $(recipe).find('.day-box').slideToggle(200);
   })
 
   $('aside .fa-calendar').on('click', function(){
-    $(this).closest('aside').toggleClass('slideAside');
+    var aside = $(this).closest('aside');
+    $(aside).toggleClass('slideAside')
+    $(aside).find('.weekly-plan').toggleClass('show-plan')
   })
 
 // Click on day of the week
   $('main').on('click', '.day', function(){
     var recipe = $(this).closest('.recipe');
+    var day = $(this).text();
     var toStore = {
       id: $(recipe).data('recipe-id'),
       imageUrl: $(recipe).find('img').attr('src'),
       title: $(recipe).find('h4').text()
     };
     MMStorage = localStorage.getItem('meal-magnet') ? JSON.parse(localStorage.getItem('meal-magnet')) : {};
-    if(MMStorage[$(this).text()]) {
-      if(Object.keys(MMStorage[$(this).text()]).length < 3){
-        MMStorage[$(this).text()][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+    if(MMStorage[day]) {
+      if(Object.keys(MMStorage[day]).length < 3){
+        MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
       }else{
         alert("You've already chosen 3 recipes for Monday. Please remove one to add another.");
       }
     }else{
-      MMStorage[$(this).text()] = {};
-      MMStorage[$(this).text()][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+      MMStorage[day] = {};
+      MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
     }
     localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
     $(this).closest('.day-box').slideToggle();
@@ -93,34 +98,43 @@ $(function() {
     var day = $(this).closest('.day').data('day');
     var MMStorage = JSON.parse(localStorage.getItem('meal-magnet'))
     delete MMStorage[day][recipeId];
+    if(Object.keys(MMStorage[day]).length === 0) delete MMStorage[day];
     localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
 
     reDrawPlan();
   });
 
+
   function reDrawPlan() {
 
-    if(!localStorage.getItem('meal-magnet')) return;
-
     var weeklyPlan = $('.weekly-plan');
-    $(weeklyPlan).html("");
-
+    var emptyMessage = "<h3 class='empty-text'>Choose some recipes!</h3>"
+    if(!localStorage.getItem('meal-magnet')) return $(weeklyPlan).html(emptyMessage);
     MMStorage = JSON.parse(localStorage.getItem('meal-magnet'));
+    if(objectLength(MMStorage) === 0) return $(weeklyPlan).html(emptyMessage);
+
+
+    $(weeklyPlan).html("");
+    // $(weeklyPlan).find('day').each(function(){
+    //   $(this).html("");
+    // });
 
     for (var day in MMStorage) {
       if (MMStorage.hasOwnProperty(day)) {
         var contents = "";
         var dayBucket = MMStorage[day];
+        '<h5>'+day+'</h5>'
         for (var recipeId in dayBucket) {
           if (dayBucket.hasOwnProperty(recipeId)) {
-            var img = "<img height='50' width='50' src='"+dayBucket[recipeId].imageUrl+"' alt='recipe image'>";
-            var title = "<h5>"+dayBucket[recipeId].title+"</h5>";
+            var img = "<img height='60' width='60' src='"+dayBucket[recipeId].imageUrl+"' alt='recipe image'>";
+            var title = "<p>"+dayBucket[recipeId].title+"</p>";
             var deleteButton = "<i class='fa fa-close' data-recipe-id='"+recipeId+"'></i>"
 
-            contents += "<div class='recipe'>"+img+title+deleteButton+"</div>";
+            contents += "<div class='recipe'>"+deleteButton+img+title+"</div>";
           }
         }
-        $(weeklyPlan).append("<div class='day' data-day='"+day+"'>"+contents+"</div>");
+        var dayTitle = '<h3>'+day+'<h3>';
+        $(weeklyPlan).append("<div class='day' data-day='"+day+"'>"+dayTitle+contents+"</div>");
       }
     }
   }
@@ -143,15 +157,20 @@ $(function() {
       url:baseUrl,
       method: 'GET',
       dataType: "jsonp"
-    }).then(function(data) {
-      $('main').html("");
-      console.log(data);
-
-      var dayBox = "<div class='day-box'><div class='day'>Monday</div><div class='day'>Tuesday</div><div class='day'>Wednesday</div><div class='day'>Thursday</div><div class='day'>Friday</div><div class='day'>Saturday</div><div class='day'>Sunday</div></div>";
-      data.matches.forEach(function(recipe){
-        $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><i class='fa fa-star'></i>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
-      });
+    }).then(function(data){
+      renderRecipeSearch(data);
     })
+  }
+
+
+  function renderRecipeSearch(data){
+    $('main').html("");
+    console.log(data);
+
+    var dayBox = "<div class='day-box'><div class='day'>Monday</div><div class='day'>Tuesday</div><div class='day'>Wednesday</div><div class='day'>Thursday</div><div class='day'>Friday</div><div class='day'>Saturday</div><div class='day'>Sunday</div></div>";
+    data.matches.forEach(function(recipe){
+      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><i class='fa fa-star'></i>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
+    });
   }
 
 
@@ -172,9 +191,9 @@ $(function() {
       var rating = data.rating ? '<span class="rating">' + data.rating + '/5 <i class="fa fa-star"></i></span>' : "";
       var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
       var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
-      var cooktime = data.totalTime ? '<p class="cooktime">'+data.totalTime+'</p>' : "";
-      var servings = data.yeild ? '<p class="servings">Serves: '+data.yeild+'</p>' : "";
-      var fullRecipe = data.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.sourceRecipeUrl+"'>See full recipe</a>" : "";
+      var cooktime = data.totalTime ? '<p class="cooktime">Cooktime: '+data.totalTime+'</p>' : "";
+      var servings = data.yield ? '<p class="servings">Serves: '+data.yield+'</p>' : "";
+      var fullRecipe = data.source.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.source.sourceRecipeUrl+"'>See full recipe</a>" : "";
 
       var ingredients = data.ingredientLines ? data.ingredientLines.reduce(function(prev, item){
         return prev + "<li>"+item+"</li>"
@@ -191,7 +210,7 @@ $(function() {
 
       var top = "<div class='row header'>"+name+rating+attribution+"</div>"
       var column1 = "<div class='column'>"+image+"<div>"+cooktime+servings+fullRecipe+"</div></div>";
-      var column2 = "<div class='column ingredients'><h3>Ingredients: </h3>"+ingredients+"</div>";
+      var column2 = "<div class='column ingredients'><h3>Ingredients </h3>"+ingredients+"</div>";
       var column3 = "<div class='column nutrition'><h3>Nutrition</h3>"+nutrition+"</div>";
       $(element).html("<div class='contents'>"+top+"<div class='row'>"+column1+column2+column3+"</div></div>");
     })
@@ -199,3 +218,8 @@ $(function() {
 
   //getRecipe();
 });
+
+
+function objectLength(object) {
+  return Object.keys(object).length;
+}

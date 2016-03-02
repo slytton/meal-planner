@@ -22,8 +22,10 @@ i:hover {
   cursor: pointer; }
 
 aside {
+  overflow: scroll;
   display: flex;
   position: fixed;
+  top: 80px;
   height: 100vh;
   width: 50px;
   justify-content: flex-start;
@@ -31,33 +33,81 @@ aside {
   flex-direction: column;
   background-color: #af2626;
   flex: 0 0 50px;
-  top: 80px;
   font-size: 20px;
-  z-index: 6; }
+  z-index: 6;
+  color: white; }
   aside i {
+    text-align: center;
+    width: 100%;
     padding-top: 30px;
     font-size: 20px;
-    color: white; }
+    padding-bottom: 20px;
+    border-bottom: 1px solid white; }
+  aside .weekly-plan {
+    opacity: 0;
+    text-align: center;
+    width: auto;
+    height: 0px;
+    padding: 0px;
+    overflow: hidden; }
+    aside .weekly-plan h3 {
+      font-weight: normal; }
+    aside .weekly-plan .empty-text {
+      background-color: #000000;
+      color: transparent;
+      text-shadow: 0px 1px 3px #af2626;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text; }
+  aside .show-plan {
+    opacity: 1;
+    width: 90%;
+    height: auto;
+    transition-duration: .5s; }
+  aside .recipe {
+    display: flex;
+    padding: 5px;
+    margin-bottom: 1px;
+    background-color: rgba(0, 0, 0, 0.53);
+    font-size: .65em;
+    align-items: center; }
+    aside .recipe * {
+      padding-right: 10px; }
+    aside .recipe .fa-close {
+      width: auto;
+      font-size: 25px;
+      border-bottom: none;
+      padding: 0 10px 0 0; }
 
 .slideAside {
-  width: 300px; }
+  width: 320px; }
+
+@media only screen and (max-width: 421px) {
+  aside {
+    top: 100px; } }
 
 .recipe-search {
+  position: fixed;
+  z-index: 5;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  position: fixed;
-  z-index: 5;
   background-color: #009688; }
   .recipe-search input {
     padding: 10px;
-    margin-right: 10px; }
+    margin-right: 10px;
+    border: 1px solid gray;
+    outline: none; }
+  .recipe-search .submit {
+    color: white;
+    margin-right: 0;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    background-color: #ff5722; }
   .recipe-search .search-field {
     width: 40%;
-    border: 1px solid gray;
-    border-radius: 5px;
-    outline: none; }
+    border-radius: 0 5px 5px 0; }
   .recipe-search i {
     margin-right: 5px;
     flex: 0 0 0;
@@ -67,13 +117,12 @@ aside {
   .recipe-search .show-advanced:hover {
     cursor: pointer;
     vertical-align: center;
-    color: #af2626; }
+    color: #dddddd; }
 
 input[type='checkbox'] {
   margin-right: 5px; }
 
 .advanced-search {
-  margin-left: 50px;
   margin-top: 20px;
   transition-duration: .5s;
   height: 0;
@@ -122,7 +171,8 @@ main {
       text-align: center;
       width: 250px;
       height: 250px;
-      overflow: hidden; }
+      overflow: hidden;
+      cursor: pointer; }
       main .recipe .image-crop i {
         color: white;
         z-index: 3;
@@ -131,7 +181,12 @@ main {
       main .recipe .image-crop .floating-icons {
         position: absolute;
         top: 10px;
-        right: 10px; }
+        right: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.34); }
+        main .recipe .image-crop .floating-icons .fa-calendar {
+          padding-left: 0px; }
       main .recipe .image-crop .more {
         position: absolute;
         bottom: 10px;
@@ -201,7 +256,7 @@ main {
     display: block;
     position: absolute;
     flex: 0 0 100%;
-    background: #414141;
+    background: #2a094a;
     height: 460px;
     width: 100%;
     visibility: visible;
