@@ -39,6 +39,9 @@ aside {
     font-size: 20px;
     color: white; }
 
+.slideAside {
+  width: 300px; }
+
 .recipe-search {
   padding-top: 20px;
   display: flex;

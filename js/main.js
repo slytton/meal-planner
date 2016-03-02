@@ -1,4 +1,7 @@
 $(function() {
+
+  reDrawPlan();
+
   var key = "8ea1f58246d1e74d0f1668267a730189";
   var id = "2f8c1c0c";
 
@@ -54,6 +57,73 @@ $(function() {
     var recipe = $(this).closest('.recipe');
     $(recipe).find('.day-box').slideToggle(200);
   })
+
+  $('aside .fa-calendar').on('click', function(){
+    $(this).closest('aside').toggleClass('slideAside');
+  })
+
+// Click on day of the week
+  $('main').on('click', '.day', function(){
+    var recipe = $(this).closest('.recipe');
+    var toStore = {
+      id: $(recipe).data('recipe-id'),
+      imageUrl: $(recipe).find('img').attr('src'),
+      title: $(recipe).find('h4').text()
+    };
+    MMStorage = localStorage.getItem('meal-magnet') ? JSON.parse(localStorage.getItem('meal-magnet')) : {};
+    if(MMStorage[$(this).text()]) {
+      if(Object.keys(MMStorage[$(this).text()]).length < 3){
+        MMStorage[$(this).text()][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+      }else{
+        alert("You've already chosen 3 recipes for Monday. Please remove one to add another.");
+      }
+    }else{
+      MMStorage[$(this).text()] = {};
+      MMStorage[$(this).text()][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+    }
+    localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
+    $(this).closest('.day-box').slideToggle();
+
+    reDrawPlan();
+  });
+
+// Click on delete recipe from plan
+  $('aside').on('click', 'i.fa-close', function(){
+    var recipeId = $(this).data('recipe-id');
+    var day = $(this).closest('.day').data('day');
+    var MMStorage = JSON.parse(localStorage.getItem('meal-magnet'))
+    delete MMStorage[day][recipeId];
+    localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
+
+    reDrawPlan();
+  });
+
+  function reDrawPlan() {
+
+    if(!localStorage.getItem('meal-magnet')) return;
+
+    var weeklyPlan = $('.weekly-plan');
+    $(weeklyPlan).html("");
+
+    MMStorage = JSON.parse(localStorage.getItem('meal-magnet'));
+
+    for (var day in MMStorage) {
+      if (MMStorage.hasOwnProperty(day)) {
+        var contents = "";
+        var dayBucket = MMStorage[day];
+        for (var recipeId in dayBucket) {
+          if (dayBucket.hasOwnProperty(recipeId)) {
+            var img = "<img height='50' width='50' src='"+dayBucket[recipeId].imageUrl+"' alt='recipe image'>";
+            var title = "<h5>"+dayBucket[recipeId].title+"</h5>";
+            var deleteButton = "<i class='fa fa-close' data-recipe-id='"+recipeId+"'></i>"
+
+            contents += "<div class='recipe'>"+img+title+deleteButton+"</div>";
+          }
+        }
+        $(weeklyPlan).append("<div class='day' data-day='"+day+"'>"+contents+"</div>");
+      }
+    }
+  }
 
   function getRecipes(query) {
 
