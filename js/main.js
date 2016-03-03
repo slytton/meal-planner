@@ -103,11 +103,7 @@ $(function() {
     var day = $(this).text();
     var recipeId = $(recipe).data('recipe-id')
     var recipeLink = "";
-    var toStore = {
-      id: $(recipe).data('recipe-id'),
-      imageUrl: $(recipe).find('img').attr('src'),
-      title: $(recipe).find('h4').text()
-    };
+    var recipeIngredients = $(recipe).data('recipe-ingredients') || [];
 
     if($(recipe).next().hasClass('recipe-info')) {
       recipeLink = $(recipe).next().find('.full-recipe').prop('href')
@@ -115,15 +111,24 @@ $(function() {
       getRecipeDetails(recipeId, addLinkToElement(day, recipeId));
     }
     MMStorage = getLocalStorage();
+
+    var toStore = {
+      id: $(recipe).data('recipe-id'),
+      imageUrl: $(recipe).find('img').attr('src'),
+      title: $(recipe).find('h4').text(),
+      link: recipeLink,
+      ingredients: recipeIngredients
+    };
+
     if(MMStorage[day]) {
       if(Object.keys(MMStorage[day]).length < 3){
-        MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title, link: recipeLink};
+        MMStorage[day][toStore.id] = toStore;
       }else{
         alert("You've already chosen 3 recipes for Monday. Please remove one to add another.");
       }
     }else{
       MMStorage[day] = {};
-      MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title, link: recipeLink};
+      MMStorage[day][toStore.id] = toStore;
     }
     updateLocalStorage(MMStorage);
     $(this).closest('.day-box').slideToggle();
@@ -248,7 +253,7 @@ $(function() {
         stars += "<i class='fa fa-star'></i>"
       }
 
-      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><span class='rating'>"+stars+"<i class='fa fa-calendar'></i></span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
+      $('main').append("<article class='recipe' data-recipe-rating='"+recipe.rating+"' data-recipe-id='"+recipe.id+"' data-recipe-ingredients='"+JSON.stringify(recipe.ingredients)+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><span class='rating'>"+stars+"<i class='fa fa-calendar'></i></span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
     });
   }
 
@@ -321,9 +326,32 @@ $(function() {
       $(this.element).html("<div class='contents'>"+top+"<div class='row'>"+column1+column2+column3+"</div></div>");
     }
   }
+
+  function objectLength(object) {
+    return Object.keys(object).length;
+  }
+
+
+  function getIngredients() {
+    var MMStorage = getLocalStorage();
+
+    var ingredients = [];
+
+    for (var day in MMStorage) {
+      if (MMStorage.hasOwnProperty(day)) {
+        var dayObj = MMStorage[day];
+        for (var recipe in dayObj) {
+          if (dayObj.hasOwnProperty(recipe)) {
+            if (!dayObj[recipe].ingredients) continue;
+            dayObj[recipe].ingredients.forEach(function(item){
+              if(!ingredients.includes(item.toLowerCase())) ingredients.push(item.toLowerCase());
+            })
+          }
+        }
+      }
+    }
+    console.log(ingredients);
+  }
+
+  getIngredients();
 });
-
-
-function objectLength(object) {
-  return Object.keys(object).length;
-}
