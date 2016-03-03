@@ -1,0 +1,21 @@
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.80);
+  width: 100vw;
+  height: 100vh;
+
+  .flex-container {
+    height: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  iframe{
+    //border:none;
+  }
+}

@@ -107,19 +107,20 @@ main {
     color: white;
     visibility: hidden;
     overflow: scroll;
+    color: rgb(76, 76, 76);
     .contents {
       display: flex;
       flex-direction: column;
-      padding: 20px 20px 20px 70px;
+      padding: 20px 20px 20px 18%;
     }
 
     .full-recipe {
-      color: rgb(253, 193, 24);
+      color: rgb(92, 42, 176);
       text-decoration: none;
     }
 
     .full-recipe:hover {
-      color: rgb(235, 139, 39);
+      color: rgb(62, 28, 120);
     }
 
     .row.header {
@@ -140,16 +141,17 @@ main {
 
     .row {
       align-items: flex-start;
-      justify-content: space-around;
+      justify-content: flex-start;
     }
     .column {
       flex: 0 0 300px;
+      margin-right: 20px;
     }
 
     li {
       list-style: none;
-      background-color: rgb(160, 160, 160);
-      border-bottom: 1px solid rgb(65, 65, 65);
+      // background-color: rgb(160, 160, 160);
+      // border-bottom: 1px solid rgb(65, 65, 65);
       padding: 8px;
     }
 
@@ -174,11 +176,11 @@ main {
     display: block;
     position: absolute;
     flex: 0 0 100%;
-    background: rgb(42, 9, 74);
+    background: rgb(232, 232, 232);
     height: 460px;
     width: 100%;
     visibility: visible;
-    border-top: 1px solid rgb(27, 26, 26);
+    border-top: 1px solid rgb(205, 205, 205);
   }
 }
 

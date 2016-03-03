@@ -22,9 +22,9 @@ i:hover {
   cursor: pointer; }
 
 .empty-text, .empty-text-main {
-  background-color: #000000;
+  background-color: rgba(162, 162, 162, 0.77);
   color: transparent;
-  text-shadow: 0px 1px 3px #af2626;
+  text-shadow: 0px 1px 3px #353535;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text; }
@@ -45,13 +45,13 @@ aside {
   overflow: scroll;
   display: flex;
   position: fixed;
-  top: 80px;
+  top: 78px;
   height: 100vh;
   width: 50px;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background-color: #af2626;
+  background-color: #353535;
   flex: 0 0 50px;
   font-size: 20px;
   z-index: 6;
@@ -85,7 +85,8 @@ aside {
     margin-bottom: 1px;
     background-color: rgba(0, 0, 0, 0.53);
     font-size: .65em;
-    align-items: center; }
+    align-items: center;
+    border-radius: 5px; }
     aside .recipe div {
       text-align: left; }
     aside .recipe * {
@@ -111,7 +112,7 @@ aside {
 
 @media only screen and (max-width: 421px) {
   aside {
-    top: 110px; } }
+    top: 108px; } }
 
 .recipe-search {
   position: fixed;
@@ -124,14 +125,14 @@ aside {
   .recipe-search input {
     padding: 10px;
     margin-right: 10px;
-    border: 1px solid gray;
+    border: none;
     outline: none; }
   .recipe-search .submit {
     color: white;
     margin-right: 0;
     border-radius: 5px 0 0 5px;
     border-right: none;
-    background-color: #ff5722; }
+    background-color: #5c2ab0; }
   .recipe-search .search-field {
     width: 40%;
     border-radius: 0 5px 5px 0; }
@@ -155,10 +156,11 @@ input[type='checkbox'] {
   transition-duration: .5s;
   height: 0;
   overflow: hidden;
-  background-color: #e0e0e0; }
+  color: #646464;
+  background-color: #646464; }
   .advanced-search .diet, .advanced-search .excluded-ingredient, .advanced-search .courses {
     border-right: 1px solid black;
-    margin-right: 20px; }
+    margin: 20px 20px 20px 0; }
     .advanced-search .diet h2, .advanced-search .excluded-ingredient h2, .advanced-search .courses h2 {
       padding-left: 10px; }
   .advanced-search .courses {
@@ -167,7 +169,8 @@ input[type='checkbox'] {
 div.show-flex {
   transition-duration: .5s;
   height: auto;
-  padding: 20px; }
+  color: white;
+  overflow: scroll; }
 
 @media only screen and (max-width: 1084px) {
   .advanced-search {
@@ -261,16 +264,17 @@ main {
     z-index: 0;
     color: white;
     visibility: hidden;
-    overflow: scroll; }
+    overflow: scroll;
+    color: #4c4c4c; }
     main .recipe-info .contents {
       display: flex;
       flex-direction: column;
-      padding: 20px 20px 20px 70px; }
+      padding: 20px 20px 20px 18%; }
     main .recipe-info .full-recipe {
-      color: #fdc118;
+      color: #5c2ab0;
       text-decoration: none; }
     main .recipe-info .full-recipe:hover {
-      color: #eb8b27; }
+      color: #3e1c78; }
     main .recipe-info .row.header {
       display: flex;
       justify-content: flex-start;
@@ -283,13 +287,12 @@ main {
       margin: 0; }
     main .recipe-info .row {
       align-items: flex-start;
-      justify-content: space-around; }
+      justify-content: flex-start; }
     main .recipe-info .column {
-      flex: 0 0 300px; }
+      flex: 0 0 300px;
+      margin-right: 20px; }
     main .recipe-info li {
       list-style: none;
-      background-color: #a0a0a0;
-      border-bottom: 1px solid #414141;
       padding: 8px; }
     main .recipe-info ul {
       padding-left: 0; }
@@ -304,11 +307,11 @@ main {
     display: block;
     position: absolute;
     flex: 0 0 100%;
-    background: #2a094a;
+    background: #e8e8e8;
     height: 460px;
     width: 100%;
     visibility: visible;
-    border-top: 1px solid #1b1a1a; }
+    border-top: 1px solid #cdcdcd; }
 
 @media only screen and (max-width: 450px) {
   .show-recipe-info {
@@ -316,3 +319,18 @@ main {
     .show-recipe-info img {
       height: auto;
       width: 90%; } }
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh; }
+  .modal .flex-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }

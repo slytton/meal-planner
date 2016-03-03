@@ -10,7 +10,7 @@
   input {
     padding: 10px;
     margin-right: 10px;
-    border: 1px solid gray;
+    border: none;
     outline: none;
   }
 
@@ -19,7 +19,7 @@
     margin-right: 0;
     border-radius: 5px 0 0 5px;
     border-right:none;
-    background-color: rgb(255, 87, 34);
+    background-color: rgb(92, 42, 176);
   }
 
   .search-field {
@@ -56,10 +56,11 @@ input[type='checkbox'] {
   transition-duration: .5s;
   height: 0;
   overflow: hidden;
-  background-color: rgb(224, 224, 224);
+  color: rgb(100, 100, 100);
+  background-color: rgb(100, 100, 100);
   .diet {
     border-right: 1px solid black;
-    margin-right: 20px;
+    margin: 20px 20px 20px 0;
 
     h2 {
       padding-left: 10px;
@@ -79,7 +80,8 @@ input[type='checkbox'] {
 div.show-flex {
   transition-duration: .5s;
   height: auto;
-  padding: 20px;
+  color: white;
+  overflow: scroll;
 }
 
 

@@ -65,6 +65,7 @@ $(function() {
     var mainLeftOffset = $('main').offset().left;
     var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
 
+    $(window).scrollTop($(recipe).offset().top);
     $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
   }
 
@@ -93,7 +94,7 @@ $(function() {
     if($(recipe).next().hasClass('recipe-info')) {
       recipeLink = $(recipe).next().find('.full-recipe').prop('href')
     }else{
-      // Call api
+      $(recipe).find('.more').trigger('click');
     }
     MMStorage = localStorage.getItem('meal-magnet') ? JSON.parse(localStorage.getItem('meal-magnet')) : {};
     if(MMStorage[day]) {
@@ -114,7 +115,7 @@ $(function() {
 
 // Click on delete recipe from plan
   $('aside').on('click', 'i.fa-close', function(){
-    var recipeId = $(this).data('recipe-id');
+    var recipeId = $(this).closest('.recipe').data('recipe-id');
     var day = $(this).closest('.day').data('day');
     var MMStorage = JSON.parse(localStorage.getItem('meal-magnet'))
     delete MMStorage[day][recipeId];
@@ -146,9 +147,9 @@ $(function() {
             var img = "<img height='60' width='60' src='"+recipe.imageUrl+"' alt='recipe image'>";
             var title = "<p class='title'>"+recipe.title+"</p>";
             var link = recipe.link ? "<a class='full-recipe' target=_blank href='"+recipe.link+"'>Full Recipe<i class='fa fa-arrow-right'></i></a>" : "";
-            var deleteButton = "<i class='fa fa-close' data-recipe-id='"+recipeId+"'></i>";
+            var deleteButton = "<i class='fa fa-close'></i>";
 
-            contents += "<div class='recipe'>"+deleteButton+img+"<div>"+title+link+"</div>"+"</div>";
+            contents += "<div class='recipe' data-recipe-id='"+recipeId+"'>"+deleteButton+img+"<div class='text'>"+title+link+"</div>"+"</div>";
           }
         }
         var dayTitle = '<h3>'+day+'<h3>';
@@ -222,7 +223,7 @@ $(function() {
         stars += "<i class='fa fa-star'></i>"
       }
 
-      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><span class='rating'>"+stars+"</span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
+      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><span class='rating'>"+stars+"<i class='fa fa-calendar'></i></span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
     });
   }
 
@@ -236,41 +237,46 @@ $(function() {
       dataType: 'jsonp'
     }).then(function(data) {
       console.log(data);
+      renderRecipeDetails(recipeId, element, data);
+      //$('aside').find('.recipe[data-recipe-id="'+recipeId+'"]').find('.text').append(data.source.sourceRecipeUrl);
 
-      var nutritionalAttributes = ["ENERC_KCAL", "FAT", "CHOCDF", "FIBTG", "SUGAR", "PROCNT", "CA"];
-
-      var stars = "";
-      for(var i = 0; i < Number(data.rating); i++) {
-        stars += "<i class='fa fa-star'></i>"
-      }
-
-      var name = data.name ? '<h2 class="title">' + data.name + '</h2>' : "";
-      var rating = data.rating ? '<span class="rating">' + stars +'</span>' : "";
-      var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
-      var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
-      var cooktime = data.totalTime ? '<p class="cooktime">Cooktime: '+data.totalTime+'</p>' : "";
-      var servings = data.yield ? '<p class="servings">Serves: '+data.yield+'</p>' : "";
-      var fullRecipe = data.source.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.source.sourceRecipeUrl+"'>See full recipe <i class='fa fa-arrow-right'></i></a>" : "";
-
-      var ingredients = data.ingredientLines ? data.ingredientLines.reduce(function(prev, item){
-        return prev + "<li>"+item+"</li>"
-      }, "<ul class='ingredients'>") + "</ul>" : "";
-
-      var nutrition = data.nutritionEstimates ? data.nutritionEstimates.reduce(function(prev, item){
-        if(nutritionalAttributes.includes(item.attribute)){
-          if(!item.description) item.description = "";
-          return prev + "<li>"+item.description.replace(/,[a-z]/i, "")+": "+item.value+" "+item.unit.plural+"</li>"
-        }
-        return prev;
-      }, "<ul class='nutrition'>") + "</ul>" : "";
-
-
-      var top = "<div class='row header'>"+name+rating+attribution+"</div>"
-      var column1 = "<div class='column'>"+image+"<div>"+cooktime+servings+fullRecipe+"</div></div>";
-      var column2 = "<div class='column ingredients'><h3>Ingredients </h3>"+ingredients+"</div>";
-      var column3 = "<div class='column nutrition'><h3>Nutrition</h3>"+nutrition+"</div>";
-      $(element).html("<div class='contents'>"+top+"<div class='row'>"+column1+column2+column3+"</div></div>");
     })
+  }
+
+  function renderRecipeDetails(recipeId, element, data){
+    var nutritionalAttributes = ["ENERC_KCAL", "FAT", "CHOCDF", "FIBTG", "SUGAR", "PROCNT", "CA"];
+
+    var stars = "";
+    for(var i = 0; i < Number(data.rating); i++) {
+      stars += "<i class='fa fa-star'></i>"
+    }
+
+    var name = data.name ? '<h2 class="title">' + data.name + '</h2>' : "";
+    var rating = data.rating ? '<span class="rating">' + stars +'</span>' : "";
+    var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
+    var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
+    var cooktime = data.totalTime ? '<p class="cooktime">Cooktime: '+data.totalTime+'</p>' : "";
+    var servings = data.yield ? '<p class="servings">Serves: '+data.yield+'</p>' : "";
+    var fullRecipe = data.source.sourceRecipeUrl ? "<a class='full-recipe' target=_blank href='"+data.source.sourceRecipeUrl+"'>See full recipe <i class='fa fa-arrow-right'></i></a>" : "";
+
+    var ingredients = data.ingredientLines.length > 0 ? data.ingredientLines.reduce(function(prev, item){
+      return prev + "<li>"+item+"</li>"
+    }, "<h3>Ingredients </h3><ul class='ingredients'>") + "</ul>" : "";
+
+    var nutrition = data.nutritionEstimates.length > 0 ? data.nutritionEstimates.reduce(function(prev, item){
+      if(nutritionalAttributes.includes(item.attribute)){
+        if(!item.description) item.description = "";
+        return prev + "<li>"+item.description.replace(/,[a-z]/i, "")+": "+item.value+" "+item.unit.plural+"</li>"
+      }
+      return prev;
+    }, "<h3>Nutrition</h3><ul class='nutrition'>") + "</ul>" : "";
+
+
+    var top = "<div class='row header'>"+name+rating+attribution+"</div>"
+    var column1 = "<div class='column'>"+image+"<div>"+cooktime+servings+fullRecipe+"</div></div>";
+    var column2 = "<div class='column ingredients'>"+ingredients+"</div>";
+    var column3 = "<div class='column nutrition'>"+nutrition+"</div>";
+    $(element).html("<div class='contents'>"+top+"<div class='row'>"+column1+column2+column3+"</div></div>");
   }
 
   //getRecipe();
