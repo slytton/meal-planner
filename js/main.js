@@ -9,10 +9,11 @@ $(function() {
     $('.advanced-search').toggleClass('show-flex');
   })
 
+  var query = {};
   $(".recipe-search").on('submit', function(event){
+    $('main').empty()
     event.preventDefault();
 
-    var query = {};
     var searchField = $('.search-field').val();
     if(searchField != "") query.q = [searchField];
 
@@ -26,7 +27,7 @@ $(function() {
 
     $(this).find('.advanced-search').removeClass('show-flex');
     console.log(query);
-    getRecipes(query);
+    getRecipes();
   });
 
 
@@ -146,9 +147,26 @@ $(function() {
     return elements;
   }
 
-  function getRecipes(query) {
+  var ajaxRecipeSearch = {
+    notFired: true,
+    startAt: 0
+  }
 
-    var baseUrl = "http://api.yummly.com/v1/api/recipes?_app_id="+id+"&_app_key="+key+"&requirePictures=true&maxResult=100&start=0&"
+  $(window).scroll(function() {
+    var docHeight = $(document).height();
+    var atHeight = $(window).scrollTop();
+
+    if(atHeight > docHeight*0.7 && ajaxRecipeSearch.notFired) {
+      ajaxRecipeSearch.notFired = false;
+      ajaxRecipeSearch.startAt += 100;
+      getRecipes();
+      console.log('fire api');
+    }
+  });
+
+
+  function getRecipes() {
+    var baseUrl = "https://api.yummly.com/v1/api/recipes?_app_id="+id+"&_app_key="+key+"&requirePictures=true&maxResult=100&start="+ajaxRecipeSearch.startAt+"&"
 
     for (var i in query) {
       if (query.hasOwnProperty(i)) {
@@ -166,14 +184,13 @@ $(function() {
       dataType: "jsonp"
     }).then(function(data){
       renderRecipeSearch(data);
+      ajaxRecipeSearch.notFired = true;
     })
   }
 
 
   function renderRecipeSearch(data){
-    $('main').html("");
     console.log(data);
-
     var dayBox = "<div class='day-box'><div class='day'>Monday</div><div class='day'>Tuesday</div><div class='day'>Wednesday</div><div class='day'>Thursday</div><div class='day'>Friday</div><div class='day'>Saturday</div><div class='day'>Sunday</div></div>";
     data.matches.forEach(function(recipe){
       $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><i class='fa fa-star'></i>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
@@ -185,7 +202,7 @@ $(function() {
   function getRecipeDetails(recipeId, element){
     var recipe = {};
     $.ajax({
-      url: "http://api.yummly.com/v1/api/recipe/"+recipeId+"?_app_id="+id+"&_app_key="+key,
+      url: "https://api.yummly.com/v1/api/recipe/"+recipeId+"?_app_id="+id+"&_app_key="+key,
       method: 'GET',
       dataType: 'jsonp'
     }).then(function(data) {
