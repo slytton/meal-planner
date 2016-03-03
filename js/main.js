@@ -81,7 +81,7 @@ $(function() {
     var mainLeftOffset = $('main').offset().left;
     var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
 
-    $(window).scrollTop($(recipe).offset().top);
+    $(window).scrollTop($(recipe).offset().top - $('main').offset().top);
     $('.modal').offset({top: $(window).scrollTop()});
     $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
   }
