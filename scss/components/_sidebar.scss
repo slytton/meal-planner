@@ -30,17 +30,10 @@ aside {
     height: 0px;
     padding: 0px;
     overflow: hidden;
+    padding-bottom: 100px;
 
-  h3 {
-    font-weight: normal;
-  }
-    .empty-text {
-      background-color: #000000;
-      color: transparent;
-      text-shadow: 0px 1px 3px rgb(175, 38, 38);
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
+    h3 {
+      font-weight: normal;
     }
   }
 
@@ -81,6 +74,6 @@ aside {
 
 @media only screen and (max-width: 421px) {
   aside {
-    top: 100px;
+    top: 110px;
   }
 }

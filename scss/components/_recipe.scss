@@ -6,6 +6,7 @@ main {
   justify-content: space-around;
   padding-left: 50px;
   top: 90px;
+  width: 100%;
 
   .recipe {
     max-width: 250px;
@@ -167,5 +168,16 @@ main {
     visibility: visible;
     border-top: 1px solid rgb(27, 26, 26);
     // transition-duration: .5s;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .show-recipe-info {
+    padding-right: 20px 0 20px 50px;
+
+    img {
+      height: auto;
+      width: 90%;
+    }
   }
 }

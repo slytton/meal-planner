@@ -21,6 +21,26 @@ div.layout {
 i:hover {
   cursor: pointer; }
 
+.empty-text, .empty-text-main {
+  background-color: #000000;
+  color: transparent;
+  text-shadow: 0px 1px 3px #af2626;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text; }
+
+.empty-text-main {
+  text-shadow: 0px 1px 3px white;
+  margin-top: 100px; }
+
+@media only screen and (min-width: 800px) {
+  .empty-text-main {
+    font-size: 30px; } }
+
+@media only screen and (min-width: 1200px) {
+  .empty-text-main {
+    font-size: 40px; } }
+
 aside {
   overflow: scroll;
   display: flex;
@@ -49,16 +69,10 @@ aside {
     width: auto;
     height: 0px;
     padding: 0px;
-    overflow: hidden; }
+    overflow: hidden;
+    padding-bottom: 100px; }
     aside .weekly-plan h3 {
       font-weight: normal; }
-    aside .weekly-plan .empty-text {
-      background-color: #000000;
-      color: transparent;
-      text-shadow: 0px 1px 3px #af2626;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text; }
   aside .show-plan {
     opacity: 1;
     width: 90%;
@@ -85,7 +99,7 @@ aside {
 
 @media only screen and (max-width: 421px) {
   aside {
-    top: 100px; } }
+    top: 110px; } }
 
 .recipe-search {
   position: fixed;
@@ -124,6 +138,7 @@ input[type='checkbox'] {
   margin-right: 5px; }
 
 .advanced-search {
+  margin-left: 50px;
   margin-top: 20px;
   transition-duration: .5s;
   height: 0;
@@ -155,13 +170,18 @@ div.show-flex {
     .row .row .column {
       flex: 0 0 110px; } }
 
+@media only screen and (max-width: 421px) {
+  .show-advanced {
+    padding-top: 10px; } }
+
 main {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding-left: 50px;
-  top: 90px; }
+  top: 90px;
+  width: 100%; }
   main .recipe {
     max-width: 250px; }
     main .recipe.showing-recipe-info {
@@ -269,3 +289,10 @@ main {
     width: 100%;
     visibility: visible;
     border-top: 1px solid #1b1a1a; }
+
+@media only screen and (max-width: 450px) {
+  .show-recipe-info {
+    padding-right: 20px 0 20px 50px; }
+    .show-recipe-info img {
+      height: auto;
+      width: 90%; } }

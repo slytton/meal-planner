@@ -51,7 +51,7 @@ input[type='checkbox'] {
 }
 
 .advanced-search {
-  //margin-left: 50px;
+  margin-left: 50px;
   margin-top: 20px;
   transition-duration: .5s;
   height: 0;
@@ -100,5 +100,11 @@ div.show-flex {
         flex: 0 0 110px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 421px) {
+  .show-advanced {
+    padding-top: 10px;
   }
 }

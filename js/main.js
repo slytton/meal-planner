@@ -35,7 +35,7 @@ $(function() {
     var recipe = $(this).closest('.recipe')[0];
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
     var recipeId = $(recipe).data('recipe-id');
-    var mainLeftOffset = $('main').offset().left;
+
 
     $('.recipe').removeClass('showing-recipe-info');
     $('.show-recipe-info').removeClass('show-recipe-info');
@@ -49,11 +49,21 @@ $(function() {
       }
       $(recipe).addClass('showing-recipe-info');
 
-      var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
-
-      $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
+      updateOffset();
     }
   });
+
+  $(window).on('resize', function(){
+    updateOffset();
+  });
+
+  function updateOffset(){
+    var recipe = $('.showing-recipe-info');
+    var mainLeftOffset = $('main').offset().left;
+    var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
+
+    $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
+  }
 
   $('main').on('click', '.recipe .fa-calendar', function(event){
     var recipe = $(this).closest('.recipe');
