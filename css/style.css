@@ -22,16 +22,16 @@ i:hover {
   cursor: pointer; }
 
 .empty-text, .empty-text-main {
-  background-color: rgba(162, 162, 162, 0.77);
+  background-color: rgba(0, 0, 0, 0.77);
   color: transparent;
-  text-shadow: 0px 1px 3px #353535;
+  text-shadow: 0px 1px 3px #795548;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text; }
 
 .empty-text-main {
   text-shadow: 0px 1px 3px white;
-  margin-top: 100px; }
+  margin-top: 175px; }
 
 .stop-scrolling {
   height: 100vh;
@@ -85,9 +85,9 @@ aside {
     overflow: scroll; }
   aside .recipe {
     display: flex;
-    padding: 5px;
+    padding: 8px 5px;
     margin-bottom: 1px;
-    background-color: rgba(0, 0, 0, 0.53);
+    background-color: rgba(0, 0, 0, 0.34);
     font-size: .65em;
     align-items: center;
     border-radius: 5px; }
@@ -137,6 +137,8 @@ aside {
     border-radius: 5px 0 0 5px;
     border-right: none;
     background-color: #5c2ab0; }
+  .recipe-search .search {
+    padding-bottom: 20px; }
   .recipe-search .search-field {
     width: 40%;
     border-radius: 0 5px 5px 0; }
@@ -154,14 +156,16 @@ aside {
 input[type='checkbox'] {
   margin-right: 5px; }
 
-.advanced-search {
+.advanced-search-container {
   margin-left: 50px;
-  margin-top: 20px;
+  display: none; }
+
+.advanced-search {
   transition-duration: .5s;
-  height: 0;
+  height: auto;
   overflow: hidden;
-  color: #d2d2d2;
-  background-color: #d2d2d2; }
+  color: #ededed;
+  background-color: #ededed; }
   .advanced-search .diet, .advanced-search .excluded-ingredient, .advanced-search .courses {
     border-right: 1px solid black;
     margin: 20px 20px 20px 0; }
@@ -171,9 +175,8 @@ input[type='checkbox'] {
     border-right: 0px; }
 
 div.show-flex {
-  transition-duration: .5s;
+  transition-duration: .25s;
   color: #646464;
-  height: auto;
   overflow: scroll; }
 
 @media only screen and (max-width: 1084px) {

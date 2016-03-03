@@ -1,3 +1,5 @@
+$asideColor: rgb(121, 85, 72);
+
 h2 {
   margin-top: 0;
 }
@@ -11,9 +13,9 @@ i:hover {
 }
 
 .empty-text {
-  background-color: rgba(162, 162, 162, 0.77);
+  background-color: rgba(0, 0, 0, 0.77);
   color: transparent;
-  text-shadow: 0px 1px 3px rgb(53, 53, 53);
+  text-shadow: 0px 1px 3px $asideColor;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
@@ -22,7 +24,7 @@ i:hover {
 .empty-text-main {
   @extend .empty-text;
   text-shadow: 0px 1px 3px rgb(255, 255, 255);
-  margin-top: 100px;
+  margin-top: 175px;
 }
 
 .stop-scrolling {

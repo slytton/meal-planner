@@ -1,3 +1,5 @@
+
+
 aside {
   overflow: scroll;
   display: flex;
@@ -8,7 +10,7 @@ aside {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(121, 85, 72);
+  background-color: $asideColor;
   flex: 0 0 50px;
   font-size: 20px;
   z-index: 6;
@@ -49,9 +51,9 @@ aside {
 
   .recipe {
     display: flex;
-    padding: 5px;
+    padding: 8px 5px;
     margin-bottom: 1px;
-    background-color: rgba(0, 0, 0, 0.53);
+    background-color: rgba(0, 0, 0, 0.34);
     font-size: .65em;
     align-items: center;
     border-radius: 5px;
