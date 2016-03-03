@@ -1,3 +1,4 @@
+$rating-color: rgb(255, 208, 5);
 
 main {
   position: relative;
@@ -7,10 +8,16 @@ main {
   padding-left: 50px;
   top: 90px;
   width: 100%;
-
   .recipe {
     max-width: 250px;
     //transition-duration: .5s;
+
+    .rating {
+      i{
+
+      }
+      color: $rating-color;
+    }
 
     &.showing-recipe-info{
       margin-bottom: 500px;
@@ -29,23 +36,29 @@ main {
       i {
         color: white;
         z-index: 3;
-        font-size: 30px;
+        font-size: 25px;
         padding-left: 10px;
       }
       .floating-icons {
+        display: flex;
+        align-items: center;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 0px;
+        right: 0px;
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 5px 0 5px 5px;
         background-color: rgba(0, 0, 0, 0.34);
 
         .fa-star {
           cursor: default;
+          color: $rating-color;
+          font-size: 20px;
+          padding-left: 5px;
         }
 
         .fa-calendar {
           padding-left: 0px;
+          padding-right: 10px;
         }
       }
 
@@ -61,7 +74,7 @@ main {
         font-size: 1em;
         color: white;
         z-index: 2;
-        top: 45px;
+        bottom: 0;
         right: 0px;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.5);
@@ -98,15 +111,6 @@ main {
       display: flex;
       flex-direction: column;
       padding: 20px 20px 20px 70px;
-    }
-
-    .rating {
-      i {
-        color: rgb(255, 208, 5);
-        font-size: 20px;
-
-      }
-      padding: 0 30px;
     }
 
     .full-recipe {
@@ -154,7 +158,15 @@ main {
     }
 
     h3 {
-      margin-top: 0px;
+      margin-top: 0;
+    }
+
+    .rating {
+      i {
+        font-size: 20px;
+        color: $rating-color;
+      }
+      padding: 0 30px;
     }
   }
 
@@ -167,9 +179,9 @@ main {
     width: 100%;
     visibility: visible;
     border-top: 1px solid rgb(27, 26, 26);
-    // transition-duration: .5s;
   }
 }
+
 
 @media only screen and (max-width: 450px) {
   .show-recipe-info {

@@ -59,6 +59,9 @@ $(function() {
 
   function updateOffset(){
     var recipe = $('.showing-recipe-info');
+
+    if(recipe.length === 0) return;
+
     var mainLeftOffset = $('main').offset().left;
     var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
 
@@ -80,21 +83,28 @@ $(function() {
   $('main').on('click', '.day', function(){
     var recipe = $(this).closest('.recipe');
     var day = $(this).text();
+    var recipeLink = "";
     var toStore = {
       id: $(recipe).data('recipe-id'),
       imageUrl: $(recipe).find('img').attr('src'),
       title: $(recipe).find('h4').text()
     };
+
+    if($(recipe).next().hasClass('recipe-info')) {
+      recipeLink = $(recipe).next().find('.full-recipe').prop('href')
+    }else{
+      // Call api
+    }
     MMStorage = localStorage.getItem('meal-magnet') ? JSON.parse(localStorage.getItem('meal-magnet')) : {};
     if(MMStorage[day]) {
       if(Object.keys(MMStorage[day]).length < 3){
-        MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+        MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title, link: recipeLink};
       }else{
         alert("You've already chosen 3 recipes for Monday. Please remove one to add another.");
       }
     }else{
       MMStorage[day] = {};
-      MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title};
+      MMStorage[day][toStore.id] = {imageUrl: toStore.imageUrl, title: toStore.title, link: recipeLink};
     }
     localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
     $(this).closest('.day-box').slideToggle();
@@ -132,11 +142,13 @@ $(function() {
         var dayBucket = MMStorage[day];
         for (var recipeId in dayBucket) {
           if (dayBucket.hasOwnProperty(recipeId)) {
-            var img = "<img height='60' width='60' src='"+dayBucket[recipeId].imageUrl+"' alt='recipe image'>";
-            var title = "<p>"+dayBucket[recipeId].title+"</p>";
-            var deleteButton = "<i class='fa fa-close' data-recipe-id='"+recipeId+"'></i>"
+            var recipe = dayBucket[recipeId];
+            var img = "<img height='60' width='60' src='"+recipe.imageUrl+"' alt='recipe image'>";
+            var title = "<p class='title'>"+recipe.title+"</p>";
+            var link = recipe.link ? "<a class='full-recipe' target=_blank href='"+recipe.link+"'>Full Recipe<i class='fa fa-arrow-right'></i></a>" : "";
+            var deleteButton = "<i class='fa fa-close' data-recipe-id='"+recipeId+"'></i>";
 
-            contents += "<div class='recipe'>"+deleteButton+img+title+"</div>";
+            contents += "<div class='recipe'>"+deleteButton+img+"<div>"+title+link+"</div>"+"</div>";
           }
         }
         var dayTitle = '<h3>'+day+'<h3>';
@@ -198,12 +210,19 @@ $(function() {
     })
   }
 
-
+// .rating > i
   function renderRecipeSearch(data){
     console.log(data);
+
     var dayBox = "<div class='day-box'><div class='day'>Monday</div><div class='day'>Tuesday</div><div class='day'>Wednesday</div><div class='day'>Thursday</div><div class='day'>Friday</div><div class='day'>Saturday</div><div class='day'>Sunday</div></div>";
     data.matches.forEach(function(recipe){
-      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><i class='fa fa-star'></i>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
+
+      var stars = "";
+      for(var i = 0; i < Number(recipe.rating); i++) {
+        stars += "<i class='fa fa-star'></i>"
+      }
+
+      $('main').append("<article class='recipe' data-recipe-id='"+recipe.id+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><i class='fa fa-calendar'></i><span class='rating'>"+stars+"</span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
     });
   }
 
@@ -220,9 +239,13 @@ $(function() {
 
       var nutritionalAttributes = ["ENERC_KCAL", "FAT", "CHOCDF", "FIBTG", "SUGAR", "PROCNT", "CA"];
 
+      var stars = "";
+      for(var i = 0; i < Number(data.rating); i++) {
+        stars += "<i class='fa fa-star'></i>"
+      }
 
       var name = data.name ? '<h2 class="title">' + data.name + '</h2>' : "";
-      var rating = data.rating ? '<span class="rating">' + data.rating + '/5 <i class="fa fa-star"></i></span>' : "";
+      var rating = data.rating ? '<span class="rating">' + stars +'</span>' : "";
       var attribution = data.attribution.url ? '<a class="attribution" href="'+data.attribution.url+'">Powered by Yummly.com</a>' : "";
       var image = data.images[0].hostedLargeUrl ? '<img class="recipe-image" src="'+data.images[0].hostedLargeUrl+'">' : "";
       var cooktime = data.totalTime ? '<p class="cooktime">Cooktime: '+data.totalTime+'</p>' : "";

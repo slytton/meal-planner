@@ -56,7 +56,7 @@ aside {
   font-size: 20px;
   z-index: 6;
   color: white; }
-  aside i {
+  aside .fa-calendar {
     text-align: center;
     width: 100%;
     padding-top: 30px;
@@ -86,6 +86,8 @@ aside {
     background-color: rgba(0, 0, 0, 0.53);
     font-size: .65em;
     align-items: center; }
+    aside .recipe div {
+      text-align: left; }
     aside .recipe * {
       padding-right: 10px; }
     aside .recipe .fa-close {
@@ -93,9 +95,19 @@ aside {
       font-size: 25px;
       border-bottom: none;
       padding: 0 10px 0 0; }
+    aside .recipe .title {
+      margin-top: 0; }
 
 .slideAside {
   width: 320px; }
+
+.full-recipe {
+  color: #bbbbbb;
+  text-decoration: none;
+  border-bottom: none; }
+
+.full-recipe:hover {
+  color: #888888; }
 
 @media only screen and (max-width: 421px) {
   aside {
@@ -184,6 +196,8 @@ main {
   width: 100%; }
   main .recipe {
     max-width: 250px; }
+    main .recipe .rating {
+      color: #ffd005; }
     main .recipe.showing-recipe-info {
       margin-bottom: 500px; }
     main .recipe .image-crop {
@@ -197,19 +211,25 @@ main {
       main .recipe .image-crop i {
         color: white;
         z-index: 3;
-        font-size: 30px;
+        font-size: 25px;
         padding-left: 10px; }
       main .recipe .image-crop .floating-icons {
+        display: flex;
+        align-items: center;
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 0px;
+        right: 0px;
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 5px 0 5px 5px;
         background-color: rgba(0, 0, 0, 0.34); }
         main .recipe .image-crop .floating-icons .fa-star {
-          cursor: default; }
+          cursor: default;
+          color: #ffd005;
+          font-size: 20px;
+          padding-left: 5px; }
         main .recipe .image-crop .floating-icons .fa-calendar {
-          padding-left: 0px; }
+          padding-left: 0px;
+          padding-right: 10px; }
       main .recipe .image-crop .more {
         position: absolute;
         bottom: 10px;
@@ -220,7 +240,7 @@ main {
         font-size: 1em;
         color: white;
         z-index: 2;
-        top: 45px;
+        bottom: 0;
         right: 0px;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.5); }
@@ -246,11 +266,6 @@ main {
       display: flex;
       flex-direction: column;
       padding: 20px 20px 20px 70px; }
-    main .recipe-info .rating {
-      padding: 0 30px; }
-      main .recipe-info .rating i {
-        color: #ffd005;
-        font-size: 20px; }
     main .recipe-info .full-recipe {
       color: #fdc118;
       text-decoration: none; }
@@ -279,7 +294,12 @@ main {
     main .recipe-info ul {
       padding-left: 0; }
     main .recipe-info h3 {
-      margin-top: 0px; }
+      margin-top: 0; }
+    main .recipe-info .rating {
+      padding: 0 30px; }
+      main .recipe-info .rating i {
+        font-size: 20px;
+        color: #ffd005; }
   main .show-recipe-info {
     display: block;
     position: absolute;

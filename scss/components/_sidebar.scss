@@ -14,7 +14,7 @@ aside {
   z-index: 6;
   color: white;
 
-  i {
+  .fa-calendar {
     text-align: center;
     width: 100%;
     padding-top: 30px;
@@ -54,6 +54,9 @@ aside {
     background-color: rgba(0, 0, 0, 0.53);
     font-size: .65em;
     align-items: center;
+    div {
+      text-align: left;
+    }
     & * {
       padding-right: 10px;
     }
@@ -63,14 +66,26 @@ aside {
       border-bottom: none;
       padding: 0 10px 0 0;
     }
+
+    .title {
+      margin-top: 0;
+    }
   }
 }
-
 
 .slideAside {
   width: 320px;
 }
 
+.full-recipe {
+  color: rgb(187, 187, 187);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.full-recipe:hover {
+  color: rgb(136, 136, 136);
+}
 
 @media only screen and (max-width: 421px) {
   aside {
