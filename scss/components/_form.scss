@@ -56,8 +56,8 @@ input[type='checkbox'] {
   transition-duration: .5s;
   height: 0;
   overflow: hidden;
-  color: rgb(100, 100, 100);
-  background-color: rgb(100, 100, 100);
+  color: rgb(210, 210, 210);
+  background-color: rgb(210, 210, 210);
   .diet {
     border-right: 1px solid black;
     margin: 20px 20px 20px 0;
@@ -79,8 +79,8 @@ input[type='checkbox'] {
 
 div.show-flex {
   transition-duration: .5s;
+  color: rgb(100, 100, 100);
   height: auto;
-  color: white;
   overflow: scroll;
 }
 

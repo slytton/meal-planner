@@ -25,6 +25,11 @@ i:hover {
   margin-top: 100px;
 }
 
+.stop-scrolling {
+  height: 100vh;
+  overflow: hidden;
+}
+
 @media only screen and (min-width: 800px) {
   .empty-text-main {
     font-size: 30px;

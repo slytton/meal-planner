@@ -10,6 +10,7 @@ $(function() {
   })
 
   var query = {};
+
   $(".recipe-search").on('submit', function(event){
     $('main').empty()
     event.preventDefault();
@@ -28,6 +29,20 @@ $(function() {
     $(this).find('.advanced-search').removeClass('show-flex');
     console.log(query);
     getRecipes();
+  });
+
+
+  $(document).on('click', '.full-recipe', function(event){
+    event.preventDefault();
+    $('body').addClass('stop-scrolling');
+    if($('iframe').prop('src') !== this.href) $('iframe').prop('src', this.href);
+    $('.modal').fadeIn(200);
+    $('.modal').offset({top: $(window).scrollTop()});
+  });
+
+  $('.modal').on('click', function(){
+    $('.modal').fadeOut(200);
+    $('body').removeClass('stop-scrolling');
   });
 
 
@@ -66,6 +81,7 @@ $(function() {
     var recipeTopOffset = $(recipe).offset().top + $(recipe).outerHeight();
 
     $(window).scrollTop($(recipe).offset().top);
+    $('.modal').offset({top: $(window).scrollTop()});
     $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
   }
 
