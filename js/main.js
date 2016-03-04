@@ -53,8 +53,7 @@ $(function() {
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
     var recipeId = $(recipe).data('recipe-id');
 
-
-    $('.recipe').removeClass('showing-recipe-info');
+    $('.recipe').removeClass('showing-recipe-info').animate({opacity: 1}, 300);
     $('.show-recipe-info').removeClass('show-recipe-info');
 
     if(!clickedRecipeShowing){
@@ -65,10 +64,16 @@ $(function() {
         getRecipeDetails(recipeId, renderRecipeDetailsCallback($(recipe).next()));
       }
       $(recipe).addClass('showing-recipe-info');
+      $('main .recipe').not('.showing-recipe-info').animate({opacity: 0.3}, 300);
 
       updateOffset();
     }
   });
+
+  $('.weekly-plan').on('click', '.fa-trash', function(){
+    emptyLocalStorage();
+    reDrawPlan();
+  })
 
   $(window).on('resize', function(){
     updateOffset();
@@ -145,6 +150,10 @@ $(function() {
     localStorage.setItem('meal-magnet', JSON.stringify(MMStorage));
   }
 
+  function emptyLocalStorage() {
+    localStorage.removeItem('meal-magnet');
+  }
+
 // Click on delete recipe from plan
   $('aside').on('click', 'i.fa-close', function(){
     var recipeId = $(this).closest('.recipe').data('recipe-id');
@@ -187,8 +196,7 @@ $(function() {
         toSort.push("<div class='day' data-day='"+day+"'>"+dayTitle+contents+"</div>");
       }
     }
-    $(weeklyPlan).html(sortStringsByDayNames(toSort).join(""));
-
+    $(weeklyPlan).html(sortStringsByDayNames(toSort).join("")).append("<i class='fa fa-trash'></i>");
   }
 
   function sortStringsByDayNames(elements){
@@ -209,7 +217,7 @@ $(function() {
     var docHeight = $(document).height();
     var atHeight = $(window).scrollTop();
 
-    if(atHeight > docHeight*0.7 && ajaxRecipeSearch.notFired) {
+    if(atHeight > docHeight*0.6 && ajaxRecipeSearch.notFired) {
       ajaxRecipeSearch.notFired = false;
       ajaxRecipeSearch.startAt += 100;
       getRecipes();

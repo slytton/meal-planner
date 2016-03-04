@@ -32,6 +32,19 @@ i:hover {
 .empty-text-main {
   text-shadow: 0px 1px 3px white;
   margin-top: 175px; }
+  .empty-text-main .fa-magnet {
+    font-size: inherit;
+    color: inherit;
+    background-color: rgba(0, 0, 0, 0.77);
+    background-color: rgba(0, 0, 0, 0.77);
+    color: transparent;
+    text-shadow: 0px 1px 3px #af3509;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    transform: rotate(90deg); }
+  .empty-text-main .fa-magnet:hover {
+    cursor: default; }
 
 .stop-scrolling {
   height: 100vh;
@@ -136,7 +149,7 @@ aside {
     margin-right: 0;
     border-radius: 5px 0 0 5px;
     border-right: none;
-    background-color: #5c2ab0; }
+    background-color: #603F98; }
   .recipe-search .search {
     padding-bottom: 20px; }
   .recipe-search .search-field {

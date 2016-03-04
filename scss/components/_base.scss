@@ -25,6 +25,23 @@ i:hover {
   @extend .empty-text;
   text-shadow: 0px 1px 3px rgb(255, 255, 255);
   margin-top: 175px;
+
+  .fa-magnet {
+    font-size: inherit;
+    color: inherit;
+    background-color: rgba(0, 0, 0, 0.77);
+    background-color: rgba(0, 0, 0, 0.77);
+    color: transparent;
+    text-shadow: 0px 1px 3px #af3509;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    transform: rotate(90deg);
+  }
+
+  .fa-magnet:hover {
+    cursor: default;
+  }
 }
 
 .stop-scrolling {
