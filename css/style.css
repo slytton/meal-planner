@@ -24,7 +24,7 @@ i:hover {
 .empty-text, .empty-text-main {
   background-color: rgba(0, 0, 0, 0.77);
   color: transparent;
-  text-shadow: 0px 1px 3px #795548;
+  text-shadow: 0px 1px 3px #af3509;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text; }
@@ -55,7 +55,7 @@ aside {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background-color: #795548;
+  background-color: #af3509;
   flex: 0 0 50px;
   font-size: 20px;
   z-index: 6;

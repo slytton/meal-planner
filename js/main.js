@@ -27,7 +27,8 @@ $(function() {
       }
     })
 
-    $(this).find('.advanced-search').removeClass('show-flex');
+    $(this).find('.advanced-search').removeClass('show-flex')
+    $(this).find('.advanced-search-container').slideUp();
     console.log(query);
     getRecipes();
   });
@@ -42,10 +43,10 @@ $(function() {
   });
 
   $('.modal').on('click', function(){
+    $('iframe').prop('src', "");
     $('.modal').fadeOut(200);
     $('body').removeClass('stop-scrolling');
   });
-
 
   $("main").on('click', '.recipe img, .more', function(event){
     var recipe = $(this).closest('.recipe')[0];
@@ -186,7 +187,6 @@ $(function() {
         toSort.push("<div class='day' data-day='"+day+"'>"+dayTitle+contents+"</div>");
       }
     }
-
     $(weeklyPlan).html(sortStringsByDayNames(toSort).join(""));
 
   }
@@ -352,6 +352,4 @@ $(function() {
     }
     console.log(ingredients);
   }
-
-  getIngredients();
 });
