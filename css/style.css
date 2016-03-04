@@ -91,8 +91,6 @@ aside {
     padding-bottom: 30px; }
     aside .weekly-plan h3 {
       font-weight: normal; }
-  aside .fa-sort-amount-asc {
-    padding-top: 20px; }
   aside .show-plan {
     opacity: 1;
     width: 90%;
@@ -187,6 +185,15 @@ input[type='checkbox'] {
     margin: 20px 20px 20px 0; }
     .advanced-search .diet h2, .advanced-search .excluded-ingredient h2, .advanced-search .courses h2 {
       padding-left: 10px; }
+  .advanced-search .sort {
+    padding-top: 38px;
+    padding-right: 20px; }
+  .advanced-search .sort-desc {
+    cursor: pointer; }
+  .advanced-search .sort-asc {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    cursor: pointer; }
   .advanced-search .courses {
     border-right: 0px; }
 

@@ -101,7 +101,7 @@ $(function() {
     $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
   }
 
-  $('.fa-sort-amount-desc').on('click',function(){
+  $('.sort-desc').on('click',function(){
     var sorted = $('main .recipe').sort(function(a, b){
       return Number($(b).data('recipe-rating')) - Number($(a).data('recipe-rating'));
     })
@@ -118,7 +118,7 @@ $(function() {
 
   });
 
-  $('.fa-sort-amount-asc').on('click',function(){
+  $('.sort-asc').on('click',function(){
     var sorted = $('main .recipe').sort(function(a, b){
       return Number($(a).data('recipe-rating')) - Number($(b).data('recipe-rating'));
     })

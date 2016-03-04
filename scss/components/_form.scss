@@ -74,6 +74,21 @@ input[type='checkbox'] {
     }
   }
 
+  .sort {
+    padding-top: 38px;
+    padding-right: 20px;
+  }
+
+  .sort-desc {
+    cursor: pointer;
+  }
+  
+  .sort-asc {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    cursor: pointer;
+  }
+
   .excluded-ingredient {
     @extend.diet;
   }
