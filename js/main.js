@@ -15,7 +15,7 @@ $(function() {
   $(".recipe-search").on('submit', function(event){
     $('main').empty()
     event.preventDefault();
-
+    query = {}
     var searchField = $('.search-field').val();
     if(searchField != "") query.q = [searchField];
 
@@ -48,7 +48,16 @@ $(function() {
     $('body').removeClass('stop-scrolling');
   });
 
+  $("main").on('click', function(event){
+    var element = $(event.toElement);
+    if($(element).closest('.image-crop').length === 0 && $(element).closest('.show-recipe-info').length === 0) {
+      $('.recipe').removeClass('showing-recipe-info').animate({opacity: 1}, 300);
+      $('.show-recipe-info').removeClass('show-recipe-info');
+    }
+  })
+
   $("main").on('click', '.recipe img, .more', function(event){
+    event.stopPropagation();
     var recipe = $(this).closest('.recipe')[0];
     var clickedRecipeShowing = $(recipe).hasClass('showing-recipe-info');
     var recipeId = $(recipe).data('recipe-id');
@@ -64,7 +73,7 @@ $(function() {
         getRecipeDetails(recipeId, renderRecipeDetailsCallback($(recipe).next()));
       }
       $(recipe).addClass('showing-recipe-info');
-      $('main .recipe').not('.showing-recipe-info').animate({opacity: 0.3}, 300);
+      $('main .recipe').not('.showing-recipe-info').animate({opacity: 0.5}, 300);
 
       updateOffset();
     }
@@ -94,7 +103,7 @@ $(function() {
 
   $('.fa-sort-amount-desc').on('click',function(){
     var sorted = $('main .recipe').sort(function(a, b){
-      return Number($(b).data('recipe-rating') - Number($(a).data('recipe-rating')));
+      return Number($(b).data('recipe-rating')) - Number($(a).data('recipe-rating'));
     })
     if(sorted.length === 0) return;
 
@@ -104,6 +113,25 @@ $(function() {
       $('main').append(sorted).animate({opacity: "1"}, 300);
     }});
 
+    $('.recipe').removeClass('showing-recipe-info').animate({opacity: 1}, 300);
+    $('.show-recipe-info').removeClass('show-recipe-info');
+
+  });
+
+  $('.fa-sort-amount-asc').on('click',function(){
+    var sorted = $('main .recipe').sort(function(a, b){
+      return Number($(a).data('recipe-rating')) - Number($(b).data('recipe-rating'));
+    })
+    if(sorted.length === 0) return;
+
+
+    $('main').animate({opacity: "0"}, {duration: 300, complete: function(){
+      $('main').empty();
+      $('main').append(sorted).animate({opacity: "1"}, 300);
+    }});
+
+    $('.recipe').removeClass('showing-recipe-info').animate({opacity: 1}, 300);
+    $('.show-recipe-info').removeClass('show-recipe-info');
   });
 
   $('main').on('click', '.recipe .fa-calendar', function(event){
@@ -141,10 +169,10 @@ $(function() {
     };
 
     if(MMStorage[day]) {
-      if(Object.keys(MMStorage[day]).length < 3){
+      if(Object.keys(MMStorage[day]).length < 5){
         MMStorage[day][toStore.id] = toStore;
       }else{
-        alert("You've already chosen 3 recipes for Monday. Please remove one to add another.");
+        alert("You've already chosen 5 recipes for Monday. Please remove one to add another.");
       }
     }else{
       MMStorage[day] = {};
@@ -231,7 +259,7 @@ $(function() {
     var docHeight = $(document).height();
     var atHeight = $(window).scrollTop();
 
-    if(atHeight > docHeight*0.6 && ajaxRecipeSearch.notFired) {
+    if(atHeight > docHeight*0.75 && ajaxRecipeSearch.notFired) {
       ajaxRecipeSearch.notFired = false;
       ajaxRecipeSearch.startAt += 100;
       getRecipes();
@@ -277,8 +305,11 @@ $(function() {
 
       $('main').append("<article class='recipe' data-recipe-rating='"+recipe.rating+"' data-recipe-id='"+recipe.id+"' data-recipe-ingredients='"+JSON.stringify(recipe.ingredients)+"'><div class='image-crop'><img height='400' src='"+recipe.imageUrlsBySize[90].replace(/=s90/, '=s350')+"'><i class='fa fa-plus-circle more'></i><span class='floating-icons'><span class='rating'>"+stars+"<i class='fa fa-calendar'></i></span>"+"</span>"+dayBox+"</div><h4>"+recipe.recipeName+"</h4></article>")
     });
-  }
 
+    if($("main .recipe").length === 0) {
+      $('main').append('<h2 class="empty-text-main"> No matches... Sorry!</h2>');
+    }
+  }
 
 
   function getRecipeDetails(recipeId, callback){

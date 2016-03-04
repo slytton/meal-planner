@@ -24,7 +24,7 @@ i:hover {
 .empty-text, .empty-text-main {
   background-color: rgba(0, 0, 0, 0.77);
   color: transparent;
-  text-shadow: 0px 1px 3px #af3509;
+  text-shadow: 0px 1px 3px #505050;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text; }
@@ -68,7 +68,7 @@ aside {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background-color: #af3509;
+  background-color: #505050;
   flex: 0 0 50px;
   font-size: 20px;
   z-index: 6;
@@ -88,9 +88,11 @@ aside {
     height: 0px;
     padding: 0px;
     overflow: hidden;
-    padding-bottom: 20px; }
+    padding-bottom: 30px; }
     aside .weekly-plan h3 {
       font-weight: normal; }
+  aside .fa-sort-amount-asc {
+    padding-top: 20px; }
   aside .show-plan {
     opacity: 1;
     width: 90%;
@@ -282,7 +284,7 @@ main {
     position: absolute;
     height: 0;
     width: 100%;
-    z-index: 0;
+    z-index: 1;
     color: white;
     visibility: hidden;
     overflow: scroll;
@@ -363,7 +365,8 @@ main {
     .modal .iframe-container iframe {
       width: 100%;
       height: 100%;
-      border: 3px solid gray; }
+      border: 3px solid gray;
+      background-color: white; }
   .modal .fa-close {
     position: absolute;
     left: -27px;
