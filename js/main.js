@@ -92,16 +92,30 @@ $(function() {
     $('.show-recipe-info').offset({top: recipeTopOffset, left: mainLeftOffset});
   }
 
+  $('.fa-sort-amount-desc').on('click',function(){
+    var sorted = $('main .recipe').sort(function(a, b){
+      return Number($(b).data('recipe-rating') - Number($(a).data('recipe-rating')));
+    })
+    if(sorted.length === 0) return;
+
+
+    $('main').animate({opacity: "0"}, {duration: 300, complete: function(){
+      $('main').empty();
+      $('main').append(sorted).animate({opacity: "1"}, 300);
+    }});
+
+  });
+
   $('main').on('click', '.recipe .fa-calendar', function(event){
     var recipe = $(this).closest('.recipe');
     $(recipe).find('.day-box').slideToggle(200);
-  })
+  });
 
   $('aside .fa-calendar').on('click', function(){
     var aside = $(this).closest('aside');
     $(aside).toggleClass('slideAside')
     $(aside).find('.weekly-plan').toggleClass('show-plan')
-  })
+  });
 
 // Click on day of the week
   $('main').on('click', '.day', function(){
