@@ -114,7 +114,7 @@ aside {
 .full-recipe:hover {
   color: #888888; }
 
-@media only screen and (max-width: 421px) {
+@media only screen and (max-width: 449px) {
   aside {
     top: 108px; } }
 
@@ -127,7 +127,7 @@ aside {
   width: 100%;
   background-color: #009688; }
   .recipe-search input {
-    padding: 10px;
+    padding: 10px 15px;
     margin-right: 10px;
     border: none;
     outline: none; }
@@ -192,7 +192,7 @@ div.show-flex {
     .row .row .column {
       flex: 0 0 110px; } }
 
-@media only screen and (max-width: 421px) {
+@media only screen and (max-width: 449px) {
   .show-advanced {
     padding-top: 10px; } }
 

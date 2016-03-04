@@ -8,7 +8,7 @@
   background-color: rgb(0, 150, 136);
 
   input {
-    padding: 10px;
+    padding: 10px 15px;
     margin-right: 10px;
     border: none;
     outline: none;
@@ -111,7 +111,7 @@ div.show-flex {
   }
 }
 
-@media only screen and (max-width: 421px) {
+@media only screen and (max-width: 449px) {
   .show-advanced {
     padding-top: 10px;
   }
