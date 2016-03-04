@@ -56,6 +56,14 @@ $(function() {
     }
   })
 
+  $(document).on('click', function(event){
+    var element = $(event.toElement);
+    if($(element).closest('.advanced-search-container').length === 0 && !$(element).hasClass('show-advanced') && !$(element).hasClass('search-field')){
+      $(".advanced-search-container").slideUp();
+      $(".advanced-search").removeClass('show-flex');
+    }
+  });
+
   $("main").on('click', '.recipe img, .more', function(event){
     event.stopPropagation();
     var recipe = $(this).closest('.recipe')[0];
