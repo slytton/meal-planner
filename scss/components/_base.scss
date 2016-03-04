@@ -1,5 +1,6 @@
 $asideColor: rgb(80, 80, 80);
 $rating-color: rgb(255, 208, 5);
+
 h2 {
   margin-top: 0;
 }
@@ -13,7 +14,7 @@ i:hover {
 }
 
 .empty-text {
-  background-color: rgba(0, 0, 0, 0.77);
+  background-color: rgba(0, 0, 0, 1);
   color: transparent;
   text-shadow: 0px 1px 3px $asideColor;
   -webkit-background-clip: text;
